@@ -330,7 +330,7 @@ export const SyncTemplateDialog: React.FC<SyncTemplateDialogProps> = ({
         const scriptContent = await invoke<string>('export_sync_script_cmd', {
             args: {
                 profile_id: presetId,
-                profile_display_name: serverProfileName || templateName || 'AeroFTP Server',
+                profile_display_name: serverProfileName || templateName || 'NextTransfer Server',
                 template_name: templateName,
                 template_description: templateDesc,
                 local_path: localPath,
@@ -379,7 +379,7 @@ export const SyncTemplateDialog: React.FC<SyncTemplateDialogProps> = ({
             const filePath = await pickFile({
                 filters: [
                     {
-                        name: 'AeroFTP sync',
+                        name: 'NextTransfer sync',
                         extensions: ['aeroftp-script', 'aerosync', 'sh', 'ps1'],
                     },
                 ],

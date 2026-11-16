@@ -310,7 +310,7 @@ export const ServerHealthCheck: React.FC<ServerHealthCheckProps> = ({ servers, o
     const copyResults = useCallback(() => {
         const lines: string[] = [];
         const date = formatDate(new Date());
-        lines.push(`AeroFTP Server Health Check: ${date}`);
+        lines.push(`NextTransfer Server Health Check: ${date}`);
         lines.push('='.repeat(60));
         lines.push('');
 

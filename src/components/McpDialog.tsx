@@ -126,10 +126,10 @@ const McpDialog: React.FC<McpDialogProps> = ({ isOpen, onClose }) => {
                         </h3>
                         <div className="flex items-center gap-2">
                             <code className="flex-1 text-xs bg-gray-100 dark:bg-gray-700 px-3 py-2 rounded-lg text-gray-900 dark:text-gray-100 font-mono">
-                                Ctrl+Shift+P &rarr; AeroFTP: Install MCP Server
+                                Ctrl+Shift+P &rarr; NextTransfer: Install MCP Server
                             </code>
                             <button
-                                onClick={() => copyToClipboard('AeroFTP: Install MCP Server', 'cmd')}
+                                onClick={() => copyToClipboard('NextTransfer: Install MCP Server', 'cmd')}
                                 className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:bg-gray-700 transition-colors cursor-pointer shrink-0"
                                 title={t('common.copy')}
                             >

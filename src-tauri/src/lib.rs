@@ -11961,7 +11961,7 @@ fn refuse_to_start(app: &tauri::AppHandle, reason: &str) {
     if let Err(error) = app
         .notification()
         .builder()
-        .title("AeroFTP cannot start")
+        .title("NextTransfer cannot start")
         .body(reason)
         .show()
     {
@@ -11969,8 +11969,8 @@ fn refuse_to_start(app: &tauri::AppHandle, reason: &str) {
     }
     end_after(REFUSAL_DEADLINE, || std::process::exit(1));
     app.dialog()
-        .message(format!("AeroFTP cannot start safely. {reason}"))
-        .title("AeroFTP UI port unavailable")
+        .message(format!("NextTransfer cannot start safely. {reason}"))
+        .title("NextTransfer UI port unavailable")
         .kind(MessageDialogKind::Error)
         .buttons(MessageDialogButtons::Ok)
         .show(refusal_answered(|| std::process::exit(1)));

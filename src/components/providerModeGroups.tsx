@@ -372,7 +372,7 @@ export const PROVIDER_MODE_GROUPS: ProviderModeGroup[] = [
         ],
         activeWarnings: {
             'WebDAV (MEGAcmd)':
-                'Requires MEGAcmd installed and logged in (run "login your-email" once in the MEGAcmd terminal). AeroFTP then runs "mega-webdav /" itself on every connect to start the bridge and read its address: no manual step. From the CLI the same profile works as "aeroftp --profile <name> ls".',
+                'Requires MEGAcmd installed and logged in (run "login your-email" once in the MEGAcmd terminal). NextTransfer then runs "mega-webdav /" itself on every connect to start the bridge and read its address: no manual step. From the CLI the same profile works as "aeroftp --profile <name> ls".',
             S4:
                 'MEGA S4 is a separate paid object-storage product (Pro plan). Create Access Keys and a bucket in the S4 Dashboard, then pick the matching region.',
         },

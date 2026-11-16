@@ -83,7 +83,7 @@ export const useAutoUpdate = ({ activityLog, disabled = false }: UseAutoUpdatePr
 
       if (info.has_update) {
         await sendSystemNotification(
-          'AeroFTP Update Available!',
+          'NextTransfer Update Available!',
           `Version ${info.latest_version} is ready.`
         );
         const checkType = manual ? '[Manual]' : '[Auto]';

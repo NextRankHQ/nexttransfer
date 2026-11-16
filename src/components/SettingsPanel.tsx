@@ -321,14 +321,14 @@ const CheckUpdateButton: React.FC<CheckUpdateButtonProps> = ({ onActivityLog }) 
                 try {
                     await sendNotification({
                         title: t('settings.updateAvailable'),
-                        body: `AeroFTP v${info.latest_version} is ready (.${info.install_format})`,
+                        body: `NextTransfer v${info.latest_version} is ready (.${info.install_format})`,
                     });
                 } catch {
                     alert(
                         t('settings.updateAvailableAlert', {
                             version: info.latest_version || '',
                             format: info.install_format || '',
-                            url: info.download_url || 'https://github.com/axpdev-lab/aeroftp/releases/latest',
+                            url: info.download_url || 'https://github.com/NextRankHQ/nexttransfer/releases/latest',
                         })
                     );
                 }
@@ -3484,7 +3484,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                                             title: t('settings.exportKeystore'),
                                                             filters: [
                                                                 {
-                                                                    name: 'AeroFTP Keystore',
+                                                                    name: 'NextTransfer Keystore',
                                                                     extensions: ['aeroftp-keystore'],
                                                                 },
                                                             ],
@@ -3574,7 +3574,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                                                 title: t('settings.importKeystore'),
                                                                 filters: [
                                                                     {
-                                                                        name: 'AeroFTP Keystore',
+                                                                        name: 'NextTransfer Keystore',
                                                                         extensions: ['aeroftp-keystore'],
                                                                     },
                                                                 ],
@@ -3600,7 +3600,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                                                 })}
                                                             </div>
                                                             <div className="text-xs text-blue-600/70 dark:text-blue-400/70 space-y-0.5">
-                                                                <div>AeroFTP {keystoreMetadata.aeroftpVersion}</div>
+                                                                <div>NextTransfer {keystoreMetadata.aeroftpVersion}</div>
                                                                 <div>{new Date(keystoreMetadata.exportDate).toLocaleString()}</div>
                                                                 {keystoreMetadata.categories.serverCredentials > 0 && (
                                                                     <div>

@@ -3220,7 +3220,7 @@ export const ConnectionScreen: React.FC<ConnectionScreenProps> = ({
                                 )}
                                 {aeroCryptKind && (<>
                                 {/* Ehud #276 (17324431): per-kind interop note. The native
-                                    format is AeroFTP-only; rclone-crypt is the standard rclone
+                                    format is NextTransfer-only; rclone-crypt is the standard rclone
                                     format and stays decryptable by rclone itself. */}
                                 <p className="text-xs text-gray-500 dark:text-gray-400">
                                     {aeroCryptKind === 'rclone-crypt' ? t('aerocryptProfile.hintRclone') : t('aerocryptProfile.hintNative')}

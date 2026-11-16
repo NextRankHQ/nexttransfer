@@ -5632,7 +5632,7 @@ const App: React.FC = () => {
         const currentVersion = await getVersion().catch(() => '');
         addToast('success',
           t('ui.updateSuccess'),
-          `AeroFTP v${currentVersion}`,
+          `NextTransfer v${currentVersion}`,
           5000
         );
 

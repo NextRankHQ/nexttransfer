@@ -108,7 +108,7 @@ export const FileAssociationsPanel: React.FC<FileAssociationsPanelProps> = ({ co
     setError(null);
     try {
       await invoke('file_associations_open_settings');
-      setNote(t('settings.fileAssociationWindowsConfirm') || 'Windows Default apps opened. Choose AeroFTP for the desired extensions, then return and Refresh.');
+      setNote(t('settings.fileAssociationWindowsConfirm') || 'Windows Default apps opened. Choose NextTransfer for the desired extensions, then return and Refresh.');
     } catch (e: any) {
       setError(String(e?.message || e || 'Failed to open OS settings'));
     }
@@ -257,7 +257,7 @@ export const FileAssociationsPanel: React.FC<FileAssociationsPanelProps> = ({ co
         <div>
           <div className="text-sm font-semibold text-gray-700 dark:text-gray-200">{t('settings.fileAssociations') || 'File associations'}</div>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-            {t('settings.fileAssociationsDesc') || 'Control which file types open with AeroFTP by default.'}
+            {t('settings.fileAssociationsDesc') || 'Control which file types open with NextTransfer by default.'}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -316,7 +316,7 @@ export const FileAssociationsPanel: React.FC<FileAssociationsPanelProps> = ({ co
       {/* AeroFTP formats */}
       <div>
         <div className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-1">
-          {t('settings.fileAssociationsAeroFormats') || 'AeroFTP formats'}
+          {t('settings.fileAssociationsAeroFormats') || 'NextTransfer formats'}
         </div>
         <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-900">
           {aeroItems.length > 0 ? aeroItems.map(renderRow) : (

@@ -764,7 +764,7 @@ export const SSHTerminal: React.FC<SSHTerminalProps> = ({
                 xterm.writeln(`\x1b[90m${t('devtools.terminalPanel.connectPrompt', { host: sshConnection?.host || t('devtools.terminalPanel.remoteServer') })}\x1b[0m`);
             } else {
                 xterm.writeln('\x1b[1;35m╔════════════════════════════════════════╗\x1b[0m');
-                xterm.writeln('\x1b[1;35m║\x1b[0m   \x1b[1;36mAeroFTP Terminal\x1b[0m                     \x1b[1;35m║\x1b[0m');
+                xterm.writeln('\x1b[1;35m║\x1b[0m   \x1b[1;36mNextTransfer Terminal\x1b[0m                \x1b[1;35m║\x1b[0m');
                 xterm.writeln('\x1b[1;35m╚════════════════════════════════════════╝\x1b[0m');
                 xterm.writeln('');
                 xterm.writeln(`\x1b[90m${t('devtools.terminalPanel.launchPrompt')}\x1b[0m`);

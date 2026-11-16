@@ -6,7 +6,7 @@
         "enHash is the SHA-256 of the flattened current en.json. Change English and run --write in the same commit.",
         "A value listed here fails the gate when a locale still equals it and the current English does not."
     ],
-    "enHash": "547a1f186ea830c20b44f2780431cc0fa30d34d88cce7e5caa1c8d132d53308b",
+    "enHash": "c5369b7e774e5ea9796b9b348770c3b20657cca4c6e702487c54349528c59232",
     "former": {
         "about.aiCredits": [
             "AI: Claude Opus 4.5 + support models"
@@ -50,6 +50,9 @@
         "activity.rename_error": [
             "[{location}] Rename failed"
         ],
+        "aeroShare.notifyOnReceiveDesc": [
+            "Show a system notification for every received file, including auto-accepted ones, so you know even when AeroFTP is not focused."
+        ],
         "aeroShare.privacy.discovery_both": [
             "n0 DNS + Mainline DHT (default)"
         ],
@@ -60,7 +63,8 @@
             "While the overlay is active: your remote session shows contents in clear, every upload is encrypted, every download is decrypted. Look for the <em>AEROCRYPT</em> badge in the path bar."
         ],
         "aerocrypt.intro.p3": [
-            "Difference vs AeroVault: AeroVault is a single self-contained <code>.aerovault</code> file (AeroFTP format). AeroCrypt is a layer on top of an existing remote (S3/SFTP/WebDAV/...) using the public rclone crypt format. Unlock with the same password you would use in <code>rclone</code>."
+            "Difference vs AeroVault: AeroVault is a single self-contained <code>.aerovault</code> file (AeroFTP format). AeroCrypt is a layer on top of an existing remote (S3/SFTP/WebDAV/...) using the public rclone crypt format. Unlock with the same password you would use in <code>rclone</code>.",
+            "Difference vs AeroVault: AeroVault is a single self-contained <code>.aerovault</code> file (AeroFTP format). Rclone Crypt is a layer on top of an existing remote (S3/SFTP/WebDAV/...) using the public rclone crypt format. Unlock with the same password you would use in <code>rclone</code>."
         ],
         "aerocrypt.title": [
             "AeroCrypt · Rclone Crypt overlay"
@@ -69,7 +73,8 @@
             "Default salt (opt-in, password-only portability; requires high entropy and attestation)"
         ],
         "aerocryptNative.intro.p3": [
-            "This is AeroFTP's <strong>native</strong> overlay, on the same audited engine as AeroVault (AES-256-GCM-SIV content, AES-256-SIV names, Argon2id). The overlay's salt is stored in <code>.aeroftp-crypt.json</code> at its root on the remote, so you can reopen it from any device with just the password."
+            "This is AeroFTP's <strong>native</strong> overlay, on the same audited engine as AeroVault (AES-256-GCM-SIV content, AES-256-SIV names, Argon2id). The overlay's salt is stored in <code>.aeroftp-crypt.json</code> at its root on the remote, so you can reopen it from any device with just the password.",
+            "This is AeroFTP's <strong>native</strong> overlay, on the same audited engine as AeroVault (AES-256-GCM-SIV content, AES-256-SIV names, Argon2id). The overlay's salt is stored in the marker (<code>.aerocrypt.tsv</code> for new vaults, legacy <code>.aeroftp-crypt.json</code> still readable) at its root on the remote, so you can reopen it from any device with just the password."
         ],
         "aerocryptNative.keyslotsF6Honesty": [
             "Removing a factor stops it opening the vault from now on. It does NOT re-encrypt your data: anyone who already kept a copy of the old vault header AND the removed credential can still open the data they had access to. To fully revoke access, re-encrypt the vault (rotate the Volume Key)."
@@ -90,11 +95,17 @@
         "aerocryptProfile.enable": [
             "AeroCrypt Profile (encrypted overlay)"
         ],
+        "aerocryptProfile.formNotRecorded": [
+            "Not recorded: this value was saved before AeroFTP asked. Choose how it was entered; a value AeroFTP imported from rclone.conf was stored as typed."
+        ],
         "aerocryptProfile.headerToggle": [
             "Write header to remote (.aeroftp-crypt.json)"
         ],
         "aerocryptProfile.hint": [
             "Encrypt this connection transparently: the dual-panel shows clear names, uploads encrypt, downloads decrypt. Readable only from AeroFTP with this password."
+        ],
+        "aerocryptProfile.hintNative": [
+            "Native AeroCrypt format: readable only from AeroFTP with this password."
         ],
         "aerocryptProfile.overlaysRemotePathHint": [
             "Remote folder where the overlay is anchored. Leave empty to use the Remote Path. Must be the Remote Path itself or a folder inside it."
@@ -175,6 +186,12 @@
         ],
         "ai.maxStepsReached": [
             "Maximum steps reached ({{max}})"
+        ],
+        "ai.mcpClient.errors.toolsUnsupported": [
+            "The server's tool list is outside what AeroFTP supports."
+        ],
+        "ai.mcpClient.errors.unsupportedVersion": [
+            "The server uses an MCP version AeroFTP does not support."
         ],
         "ai.mcpClient.networkAccess": [
             "Allow network access (all hosts)"
@@ -295,7 +312,11 @@
             "Convert to {{mode}}"
         ],
         "connection.filenApiKeyHelp": [
-            "Paste the API key from your Filen CLI profile to skip the 2FA code on every reconnect. The account password is still required: it decrypts your files end-to-end."
+            "Paste the API key from your Filen CLI profile to skip the 2FA code on every reconnect. The account password is still required: it decrypts your files end-to-end.",
+            "Paste the API key from your Filen CLI profile to skip the 2FA code on every reconnect. The account password is still required: it decrypts your files end-to-end. Once saved, the key is stored encrypted in the vault and is not shown here again (like your 2FA secret); AeroFTP reuses it automatically. Leave blank on edit to keep the stored key."
+        ],
+        "connection.forms.megacmdWebdavHint": [
+            "Username and Password are intentionally omitted. AeroFTP runs \"{cmd}\" itself on connect to start the bridge and read this address: leaving it blank is fine. Fetch URL is an optional manual refresh; change the port here if MEGAcmd uses a custom one."
         ],
         "connection.generatePassword": [
             "Generate password"
@@ -313,6 +334,7 @@
             "Uses the existing MEGAcmd bridge. Best compatibility with the current implementation."
         ],
         "connection.megaModeNativeDesc": [
+            "Direct integration in AeroFTP. Recommended for the best experience.",
             "Direct integration in AeroFTP. Recommended target path for the new connector."
         ],
         "connection.megaNativeNotice": [
@@ -331,6 +353,21 @@
         "connection.oauth.redirectUriNoteGoogle": [
             "Google accepts any loopback port. Copy this as the Authorized Redirect URI in your Google Cloud Console.",
             "Recommended: create a \"Desktop app\" OAuth Client ID in Google Cloud Console (no redirect URI needed). If using \"Web application\" type, set the redirect URI to http://127.0.0.1."
+        ],
+        "connection.oauthKeysMissing": [
+            "No app keys for {provider} are stored in the vault, so AeroFTP cannot sign in. AeroFTP does not ship its own keys: enter the keys of your {provider} developer app in {location}, then connect again."
+        ],
+        "connection.oauthKeysReadFailed": [
+            "AeroFTP could not read the {provider} app keys from the vault, so it cannot sign in. The keys were not changed. Error: {error}"
+        ],
+        "connection.protonCliBody": [
+            "Install the Proton Drive CLI from proton.me/download/drive/cli, then run proton-drive auth login in a terminal and finish in the browser. AeroFTP never sees your password; the session stays in the OS secret store."
+        ],
+        "connection.protonNativeBody": [
+            "AeroFTP connects to Proton Drive directly and encrypts and decrypts your files on this computer. You sign in on Proton's own page in the browser: AeroFTP never sees your password, and keeps the session in its encrypted vault."
+        ],
+        "connection.protonSignInHelp": [
+            "AeroFTP opens Proton's sign-in page in your browser. You can end the session anytime in your Proton account settings, or with Sign out here."
         ],
         "connection.securityEncryption": [
             "AES-256-GCM encryption with Argon2id key derivation for local storage"
@@ -353,8 +390,23 @@
         "connection.totpSecret": [
             "TOTP Secret (optional, saved)"
         ],
+        "connection.totpSecretHelp": [
+            "Save your 2FA secret once. AeroFTP will generate the 6-digit code automatically at every reconnect, the same way an authenticator app does."
+        ],
+        "connection.twakeSignInHelp": [
+            "AeroFTP opens Twake in your browser and asks for access to your files only. If Twake shows an error the first time, log in to Twake in the browser and sign in again. You can revoke access anytime in Twake Settings, Connected devices."
+        ],
         "connection.twoFactorCode": [
             "2FA Code"
+        ],
+        "contextMenu.dropboxRestoreLimit": [
+            "AeroFTP can restore recoverable file revisions. Restore folders from Deleted files on dropbox.com. A question mark means Dropbox did not identify the item type."
+        ],
+        "contextMenu.extractHereUncheckedConfirm": [
+            "The names inside {name} cannot be read before extracting, so AeroFTP cannot check what Extract Here would overwrite in this folder. Extract to Folder never overwrites."
+        ],
+        "contextMenu.importToAeroFTP": [
+            "Import to AeroFTP"
         ],
         "contextMenu.pcloudTrashTitle": [
             "pCloud Trash"
@@ -376,6 +428,12 @@
         ],
         "debug.frontend.keysCount": [
             "{count} key(s)"
+        ],
+        "debug.system.appVersion": [
+            "AeroFTP Version"
+        ],
+        "dependencies.copyTitle": [
+            "AeroFTP Dependencies Check"
         ],
         "devtools.closeDevTools": [
             "Close DevTools"
@@ -401,6 +459,9 @@
         "duplicates.title": [
             "Find Duplicates"
         ],
+        "error.description": [
+            "AeroFTP encountered an unexpected error. You can try to recover or reload the application."
+        ],
         "filelu.cloneSuccess": [
             "File cloned — URL copied to clipboard"
         ],
@@ -409,7 +470,23 @@
         ],
         "flatpak.importBody": [
             "AeroFTP found an existing configuration in your home folder. This Flatpak install uses its own separate storage, so your saved servers and encrypted vault are not visible here yet. Import them now? Files are only copied and nothing is overwritten, and your vault unlocks here the same way it does now.",
-            "AeroFTP found an existing configuration in your home folder. This Flatpak install uses its own separate storage, so your saved servers and encrypted vault are not visible here yet. Import them now? Files are only copied, nothing is overwritten, and the vault still needs your password to unlock."
+            "AeroFTP found an existing configuration in your home folder. This Flatpak install uses its own separate storage, so your saved servers and encrypted vault are not visible here yet. Import them now? Files are only copied, nothing is overwritten, and the vault still needs your password to unlock.",
+            "AeroFTP found an existing configuration in your home folder. This Flatpak install uses its own separate storage, so your saved servers and encrypted vault are not visible here yet. Import your configuration now? Files are only copied, and a file this Flatpak install already has is never overwritten."
+        ],
+        "flatpak.importFailedBody": [
+            "The import stopped with an error: {error}. Files already copied into this Flatpak install stay there, and nothing was overwritten. AeroFTP will offer the import again at the next start."
+        ],
+        "flatpak.importUnreadableResult": [
+            "AeroFTP could not read the result of the import"
+        ],
+        "flatpak.importedBody": [
+            "Your configuration was imported. Restart AeroFTP to load your servers and vault."
+        ],
+        "flatpak.importedNoVaultBody": [
+            "Your configuration was imported, but it held no saved servers or vault the import could copy. Restart AeroFTP to load what was imported."
+        ],
+        "flatpak.importedVaultSkippedBody": [
+            "Part of your configuration was imported, but not your saved servers and vault: this Flatpak install already has its own vault, and existing files are never overwritten. Restart AeroFTP to load what was imported."
         ],
         "github.alreadyAuthorized": [
             "Already authorized — ready to connect"
@@ -426,6 +503,9 @@
         "github.appTokenExpiringSoon": [
             "Token expiring soon — will auto-refresh on connect"
         ],
+        "github.commitMessagePlaceholder": [
+            "Update via AeroFTP"
+        ],
         "github.installationIdPlaceholder": [
             "Installation ID (e.g. 117087346)"
         ],
@@ -433,10 +513,17 @@
             "OAuth"
         ],
         "github.pemStoredInVault": [
+            "Your PEM key is now encrypted (AES-256) and stored securely in the vault. For your safety, delete or secure the original .pem file - AeroFTP no longer needs it.",
             "Your PEM key is now encrypted (AES-256) and stored securely in the vault. For your safety, delete or secure the original .pem file — AeroFTP no longer needs it."
         ],
         "github.pemVaultReady": [
             "PEM key found in vault — ready to connect"
+        ],
+        "github.unpushedCommitsDesc": [
+            "Your local git repository has commits not yet pushed to GitHub. Uploading via AeroFTP creates commits on the remote HEAD, which may skip your local changes and cause merge conflicts."
+        ],
+        "guiController.banner": [
+            "{agent} is controlling AeroFTP"
         ],
         "introHub.breakdown.noData": [
             "No protocol data yet — connect at least one server."
@@ -462,17 +549,26 @@
         "lockScreen.securityNote": [
             "Your data is protected with AES-256-GCM encryption"
         ],
+        "manageUsers.destructiveReset.wipeDetail": [
+            "The current password cannot be recovered. AeroFTP will delete the target account's saved servers, user settings, and lockout state, then issue a new encryption key protected by the new password."
+        ],
         "masterPassword.setupInfo": [
             "Your credentials are already encrypted. The master password adds an extra layer of protection — you'll need to enter it when the app starts or after inactivity."
         ],
         "masterPassword.tooShort": [
             "Minimum 8 characters"
         ],
+        "menu.about": [
+            "About AeroFTP"
+        ],
         "menu.devtools": [
             "DevTools"
         ],
         "menu.mountManager": [
             "Mount Manager..."
+        ],
+        "menu.quit": [
+            "Quit AeroFTP"
         ],
         "menu.toggleAgent": [
             "Toggle Agent"
@@ -493,10 +589,15 @@
             "Mount Manager"
         ],
         "portable.banner.body": [
+            "Every portable installation is fully self-contained: saved servers, AeroVault, AI chats and preferences all live next to AeroFTP.exe. From v3.7.8 onward, two portable folders on the same PC are completely independent - deleting a profile in one folder no longer affects the other.",
             "Every portable installation is fully self-contained: saved servers, AeroVault, AI chats and preferences all live next to AeroFTP.exe. From v3.7.8 onward, two portable folders on the same PC are completely independent — deleting a profile in one folder no longer affects the other."
         ],
         "portable.banner.legacyWarning": [
-            "We detected leftover data from a previous shared install at %LOCALAPPDATA%\\com.aeroftp.AeroFTP\\. It is no longer used by this portable installation. You can remove it manually if you do not need it."
+            "We detected leftover data from a previous shared install at %LOCALAPPDATA%\\com.aeroftp.AeroFTP\\. It is no longer used by this portable installation. You can remove it manually if you do not need it.",
+            "We found data from a previous shared install at %LOCALAPPDATA%\\com.aeroftp.AeroFTP\\. This portable installation does not use it. If AeroFTP is also installed on this PC (MSI or setup), that folder holds the installed app's data: keep it. Otherwise you can remove it manually if you do not need it."
+        ],
+        "portable.banner.title": [
+            "Portable mode: this folder holds all your AeroFTP data"
         ],
         "preview.text.stats": [
             "{lines} line(s) • {chars} chars"
@@ -592,6 +693,12 @@
         "protocol.googledriveDesc": [
             "Connect with Google Account"
         ],
+        "protocol.independentProject": [
+            "AeroFTP is an independent project. {provider} integration is maintained through official documentation."
+        ],
+        "protocol.independentProjectContact": [
+            "AeroFTP is an independent project in direct contact with {provider} to ensure reliable integration and direct support."
+        ],
         "protocol.infinicloudApiKeyHint": [
             "Enables auto-discovery and quota. Apply at infini-cloud.net developer page."
         ],
@@ -627,6 +734,7 @@
             "Connects through the Proton Drive CLI"
         ],
         "protocol.protonTooltip": [
+            "Use AeroFTP's native client or the official Proton Drive CLI, with browser sign-in.",
             "Uses the Proton Drive CLI - install it, sign in in the browser, AeroFTP is the GUI"
         ],
         "protocol.s3Desc": [
@@ -666,8 +774,23 @@
         "protocol.webdavDesc": [
             "Nextcloud, ownCloud, Synology"
         ],
+        "protocol.webdavLocalSchemeAuto": [
+            "AeroFTP detects the Filen bridge protocol (HTTP or HTTPS) automatically when you connect, so there is nothing to set here."
+        ],
         "protocol.zohoworkdriveDesc": [
             "Team Cloud Storage"
+        ],
+        "provider.modes.mega.webdavDescription": [
+            "Local WebDAV bridge served by the official MEGAcmd CLI, anonymous on 127.0.0.1. AeroFTP runs \"mega-webdav /\" for you on connect, so there is no manual step."
+        ],
+        "provider.modes.notInBuild": [
+            "Not included in this build of AeroFTP."
+        ],
+        "provider.modes.proton.apiDescription": [
+            "AeroFTP's own Proton Drive client: you sign in on Proton's page in the browser, files are encrypted and decrypted on this computer, and no other app is needed."
+        ],
+        "provider.modes.proton.cliDescription": [
+            "Drives the official Proton Drive CLI installed and signed in on this machine. You sign in in the browser; AeroFTP never sees your Proton password."
         ],
         "providers.shareLink": [
             "Share Link"
@@ -692,6 +815,12 @@
             "Turn any FTP/FTPS server into your personal cloud. Configure sync folders, intervals, and conflict resolution.",
             "Turn any server into your personal cloud. Supports all 20 protocols. Configure sync folders, intervals, and conflict resolution."
         ],
+        "settings.aeroftpBackupFiles": [
+            "AeroFTP Backup Files"
+        ],
+        "settings.analyticsDesc": [
+            "Help improve AeroFTP by sharing: app version, language, and OS. No personal data or server information is ever collected."
+        ],
         "settings.backupRowFullBackup": [
             "AeroFTP - Full Backup"
         ],
@@ -704,6 +833,12 @@
         "settings.bridgeImportDesc": [
             "Import profiles from rclone, WinSCP, or FileZilla"
         ],
+        "settings.bridgeSecretFull": [
+            "Credentials are recovered and re-encrypted into the AeroFTP vault."
+        ],
+        "settings.closeToTrayDesc": [
+            "When you click the window close button, hide AeroFTP to the system tray instead of quitting. Background tasks like AeroCloud sync keep running. Use the tray menu to quit."
+        ],
         "settings.cloudProviderDesc": [
             "Configure cloud storage providers. AeroCloud uses your FTP server, OAuth2 providers need API credentials."
         ],
@@ -713,14 +848,35 @@
         "settings.connectWithPcloud": [
             "Connect with pCloud Account"
         ],
+        "settings.disableUpdateChecksDesc": [
+            "Skip the automatic startup and daily update check. Useful when you manage AeroFTP through WinGet, AUR, or another external package manager. Manual checks above still work."
+        ],
         "settings.downloadSegmentsDesc": [
             "Split each download into parallel byte ranges. Auto keeps today's single-stream behaviour. Effective on providers that support range requests (SFTP, S3, HTTP) for files large enough to benefit."
         ],
         "settings.duplicatesSkippedCount": [
             "{count} duplicate(s) skipped"
         ],
+        "settings.fileAssociationIntegrationPortable": [
+            "Install AeroFTP to change Windows integration."
+        ],
+        "settings.fileAssociationRegisterOwned": [
+            "Register AeroFTP file formats"
+        ],
+        "settings.fileAssociationWindowsConfirm": [
+            "Windows will ask you to confirm. Choose AeroFTP, then return here and Refresh."
+        ],
+        "settings.fileAssociationsAeroFormats": [
+            "AeroFTP formats"
+        ],
+        "settings.fileAssociationsDesc": [
+            "Choose which file types open with AeroFTP by default. The OS is the source of truth."
+        ],
         "settings.fontSizeDesc": [
             "Adjust the interface text size"
+        ],
+        "settings.fontSystemInstallHint": [
+            "Requires system install. AeroFTP falls back automatically if unavailable."
         ],
         "settings.foursharedDesc": [
             "OAuth 1.0 — 15 GB free storage"
@@ -728,11 +884,26 @@
         "settings.githubOauthDesc": [
             "Device Flow OAuth — no Client ID needed"
         ],
+        "settings.githubOauthInfo": [
+            "GitHub uses Device Flow OAuth with the built-in AeroFTP App. No client credentials are required. You can also use a Personal Access Token or a GitHub App .pem key from the connection screen."
+        ],
         "settings.importOauthAppKept": [
             "{names} came with a different custom OAuth app than the one this device has for that provider. The stored app was kept because other profiles use it, so sign in again if these profiles stop connecting."
         ],
         "settings.includeCredentialsHint": [
             "Passwords and API keys will be encrypted in the file"
+        ],
+        "settings.keystoreRestartRequired": [
+            "Restart AeroFTP to apply restored databases and plugins."
+        ],
+        "settings.launchOnStartupDesc": [
+            "Automatically start AeroFTP when your computer boots. Recommended if you use AeroCloud Sync."
+        ],
+        "settings.masterPasswordDesc": [
+            "Protect AeroFTP with a master password. The app will lock after inactivity and require your password to unlock."
+        ],
+        "settings.migrationDesc": [
+            "AeroFTP found unencrypted data that should be moved to the encrypted vault for maximum security."
         ],
         "settings.nativeRsync.description": [
             "Use AeroFTP's built-in rsync protocol implementation instead of spawning the system rsync binary. Reduces process overhead; may be less battle-tested."
@@ -743,6 +914,9 @@
         "settings.nativeRsync.title": [
             "Native rsync (experimental)"
         ],
+        "settings.oauthNote": [
+            "OAuth2 credentials are stored locally in your encrypted vault and never sent to AeroFTP servers."
+        ],
         "settings.privacy": [
             "Privacy & Security"
         ],
@@ -750,9 +924,14 @@
             "Control your data and privacy settings"
         ],
         "settings.privacyRespect": [
+            "AeroFTP protects your privacy. No data is collected, no tracking, no telemetry.",
             "AeroFTP respects your privacy. We collect minimal data to improve the application."
         ],
+        "settings.restartApp": [
+            "Restart AeroFTP"
+        ],
         "settings.startMinimizedOnAutostartDesc": [
+            "Hide the main window on autostart launch. AeroFTP keeps running in the system tray - open it from the tray icon when you need it.",
             "Hide the main window on autostart launch. AeroFTP keeps running in the system tray — open it from the tray icon when you need it."
         ],
         "settings.storageThresholdsDesc": [
@@ -771,9 +950,11 @@
             "Reset to defaults"
         ],
         "settings.upToDateAlert": [
+            "Up to date!\n\nRunning AeroFTP v{version}",
             "Up to date!\n\nRunning AeroFTP v{{version}}"
         ],
         "settings.updateAvailableAlert": [
+            "Update Available!\n\nAeroFTP v{version} (.{format})\n\nDownload: {url}",
             "Update Available!\n\nAeroFTP v{{version}} (.{{format}})\n\nDownload: {{url}}"
         ],
         "settings.updateCheckFailedAlert": [
@@ -789,11 +970,21 @@
         "settings.zohoWorkDriveDesc": [
             "OAuth 2.0 — 5 GB team storage"
         ],
+        "shortcuts.quit": [
+            "Quit AeroFTP"
+        ],
+        "sidebar.partitions_need_udisks2": [
+            "In the snap, unmounted partitions appear, and can be mounted and ejected, once its udisks2 permission is connected. Run this in a terminal, then return to AeroFTP:"
+        ],
         "sidebar.portable_honesty": [
-            "Portable devices use MTP: whole-file copy only, no drive letter, and some operations are limited by the device OS."
+            "Portable devices use MTP: whole-file copy only, no drive letter, and some operations are limited by the device OS.",
+            "Portable devices use MTP: whole-file copy only, no drive letter, no resume, and some operations are limited by the device OS (not AeroFTP)."
         ],
         "sidebar.portable_no_storages": [
             "Session open (no storage list yet; browse polish follows)"
+        ],
+        "sidebar.volumes_need_mount_observe": [
+            "In the snap, volumes appear once its mount-observe permission is connected. Run this in a terminal, then return to AeroFTP:"
         ],
         "speedTest.compareDisclaimer": [
             "Running this on {count} servers transfers about {total} ({size} per server, upload + download) and uses up to {total} of local temp storage in parallel. Provider request and egress costs may apply."
@@ -807,6 +998,12 @@
         "statusBar.usedScanHint": [
             "Recursively scan the tree to compute used space. Combined with a manual total it shows used/total/%. Runs only when you trigger it."
         ],
+        "support.subtitle": [
+            "Your support helps keep AeroFTP free!"
+        ],
+        "support.title": [
+            "Support AeroFTP"
+        ],
         "syncPanel.canaryDryRun": [
             "Nothing is transferred: this previews what a full sync would do, computed from the sample (similar to rclone --dry-run)."
         ],
@@ -819,6 +1016,9 @@
         ],
         "syncPanel.templateImportPathPairs": [
             "This template defines {count} usable local/remote path pairs. AeroFTP applies exactly one, so nothing was imported. Edit the template to keep a single pair, then import it again."
+        ],
+        "syncPanel.templateScriptInvalidToast": [
+            "Script does not contain AeroFTP metadata"
         ],
         "syncPanel.title": [
             "Synchronize Files"
@@ -840,6 +1040,9 @@
         ],
         "toast.downloadFailed": [
             "Download failed: {error}"
+        ],
+        "toast.scpModeBody": [
+            "{host} has no SFTP, so AeroFTP is using SCP on the same connection."
         ],
         "toast.uploadFailed": [
             "Upload failed: {error}"
@@ -871,8 +1074,17 @@
         "transfer.restoredHint": [
             "Restored from a previous session. Reconnect to the same server, then press Retry to re-run."
         ],
+        "twoFactor.autoRetryFailedBody": [
+            "AeroFTP could not authenticate with the saved 2FA secret. Open Edit on the profile and verify the 2FA Secret."
+        ],
         "ui.session.transferInProgress": [
             "Transfer in progress — tab switching disabled"
+        ],
+        "ui.updateAvailable": [
+            "AeroFTP v{version} Available!"
+        ],
+        "update.installRestarting": [
+            "Restarting AeroFTP..."
         ],
         "vault.exportParityHint": [
             "Write a detached .aerovault.rec recovery file from the current data"
@@ -891,7 +1103,8 @@
         ],
         "vault.zipPlaintextDesc": [
             ".aerozip provides high compression, integrity checks, and recovery. It is not encrypted; anyone with the file can read it.",
-            "Not encrypted — no confidentiality. It will not open in a normal zip tool: it needs AeroFTP or the open-source aerovault crate. The format is open, so anyone motivated can recover the contents."
+            "Not encrypted — no confidentiality. It will not open in a normal zip tool: it needs AeroFTP or the open-source aerovault crate. The format is open, so anyone motivated can recover the contents.",
+            "Not encrypted, no confidentiality. It will not open in a normal zip tool: it needs AeroFTP or the open-source aerovault crate. The format is open, so anyone motivated can recover the contents."
         ],
         "vaultSync.filesSkippedCount": [
             "{count} file(s) skipped"

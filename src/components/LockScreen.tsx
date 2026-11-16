@@ -238,7 +238,7 @@ export const LockScreen: React.FC<LockScreenProps> = ({ onUnlock, mode = 'master
                     {/* Header: icon + title (matches AeroVault) */}
                     <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-700">
                         <Shield size={18} className="text-emerald-400" />
-                        <span className="font-medium text-gray-100">AeroFTP</span>
+                        <span className="font-medium text-gray-100">NextTransfer</span>
                         <span className="text-xs text-gray-500 ml-auto">{t('lockScreen.locked')}</span>
                     </div>
 
@@ -362,7 +362,7 @@ export const LockScreen: React.FC<LockScreenProps> = ({ onUnlock, mode = 'master
 
                 {/* Version badge */}
                 <div className="mt-3 text-center">
-                    <span className="text-xs text-gray-600">AeroFTP {appVersion ? `v${appVersion}` : ''}</span>
+                    <span className="text-xs text-gray-600">NextTransfer {appVersion ? `v${appVersion}` : ''}</span>
                 </div>
             </div>
         </div>

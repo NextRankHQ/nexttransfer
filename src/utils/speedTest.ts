@@ -242,7 +242,7 @@ export function buildMethodologyReport(
 ): string {
     const ranked = rankOutcomes(outcomes);
     const lines: string[] = [];
-    lines.push('AeroFTP Speed Test');
+    lines.push('NextTransfer Speed Test');
     lines.push(`Date: ${nowIso()}`);
     if (ctx.clientVersion) lines.push(`Client: ${ctx.clientVersion}`);
     lines.push(`Test size: ${formatBytes(ctx.sizeBytes)}`);
@@ -403,7 +403,7 @@ export function buildMarkdownReport(
 ): string {
     const ranked = rankOutcomes(outcomes);
     const lines: string[] = [];
-    lines.push('# AeroFTP Speed Test');
+    lines.push('# NextTransfer Speed Test');
     lines.push('');
     lines.push(`- **Date:** ${nowIso()}`);
     if (ctx.clientVersion) lines.push(`- **Client:** ${ctx.clientVersion}`);
