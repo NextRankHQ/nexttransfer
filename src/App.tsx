@@ -19486,7 +19486,7 @@ const App: React.FC = () => {
           } : undefined}
         />
         <CloudPanel
-          isOpen={showCloudPanel}
+          isOpen={false}
           onClose={() => setShowCloudPanel(false)}
           onOpenServers={() => setShowConnectionScreen(true)}
         />
@@ -20014,18 +20014,6 @@ const App: React.FC = () => {
               onParkActiveSession={takeOverActiveSession}
               serversRefreshKey={serversRefreshKey}
               onServersChanged={() => setServersRefreshKey(k => k + 1)}
-              onAeroCloud={() => {
-                if (isCloudActive) {
-                  // Already connected: switch to cloud tab
-                  setShowConnectionScreen(false);
-                } else {
-                  // Not connected: open config
-                  setShowCloudPanel(true);
-                }
-              }}
-              isAeroCloudConfigured={true}
-              isAeroCloudConnected={isCloudActive}
-              isAeroCloudPaused={isCloudPaused}
               onAeroFile={handleToggleAeroFile}
               onOpenCrossProfile={(opts) => setShowCrossProfilePanel(opts ?? {})}
               onOpenMountManager={() => setShowMountManager({})}
@@ -20488,14 +20476,6 @@ const App: React.FC = () => {
                 onTabClose={closeSession}
                 onCloseAll={closeAllSessions}
                 onNewTab={handleNewTabFromSavedServer}
-                cloudTab={isCloudActive ? {
-                  enabled: true,
-                  syncing: cloudSyncing,
-                  active: isCloudActive,
-                  paused: isCloudPaused,
-                  serverName: cloudServerName || 'AeroCloud'
-                } : undefined}
-                onCloudTabClick={handleCloudTabClick}
                 onReorder={setSessions}
                 transferLocked={hasQueueActivity}
                 localTabs={(!isConnected || !showRemotePanel) ? localTabs : undefined}
