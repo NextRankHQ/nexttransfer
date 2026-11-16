@@ -6991,7 +6991,7 @@ async fn fetch_latest_release_version() -> Result<String, String> {
         .map_err(|e| format!("Cannot build HTTP client: {}", e))?;
 
     let release = client
-        .get("https://api.github.com/repos/axpdev-lab/aeroftp/releases/latest")
+        .get("https://api.github.com/repos/NextRankHQ/nexttransfer/releases/latest")
         .header(reqwest::header::ACCEPT, "application/vnd.github+json")
         .header(
             reqwest::header::USER_AGENT,
@@ -35290,10 +35290,7 @@ mod serve_sftp {
                     let Some(path) = self.handles.get(&handle).cloned() else {
                         return make_status(id, SSH_FX_FAILURE, "invalid handle");
                     };
-                    let result = rt.block_on(async {
-                        let mut p = self.provider.lock().await;
-                        p.stat(&path).await
-                    });
+                    let result = prov!(provider, rt, async |p| p.stat(&path).await);
                     match result {
                         Ok(entry) => {
                             let mut reply = Vec::new();
