@@ -1,4 +1,4 @@
-name: Build AeroFTP
+name: Build NextTransfer
 
 on:
   push:
@@ -438,24 +438,28 @@ jobs:
           PACKAGE_ARCH: ${{ matrix.arch }}
         run: |
           set -euo pipefail
+          images=(src-tauri/target/release/bundle/dmg/*.dmg)
+          if [[ "${#images[@]}" != 1 ]]; then
+            echo "::error::Expected exactly one DMG, found ${#images[@]}"
+            exit 1
+          fi
           baseline_dir="${RUNNER_TEMP}/aeroftp-dmg-baseline"
           mkdir -p "$baseline_dir"
-          baseline_tag=$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)
+          baseline_tag=$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name 2>/dev/null || true)
+          if [[ -z "$baseline_tag" ]]; then
+            echo "No prior release found in $GITHUB_REPOSITORY; skipping baseline DMG comparison for initial release."
+            exit 0
+          fi
           echo "Comparing against latest published release: $baseline_tag"
           gh release download "$baseline_tag" --repo "$GITHUB_REPOSITORY" \
-            --pattern "*_${PACKAGE_ARCH}.dmg" --dir "$baseline_dir"
+            --pattern "*_${PACKAGE_ARCH}.dmg" --dir "$baseline_dir" || true
           expected_arch=arm64
           if [[ "$PACKAGE_ARCH" == x64 ]]; then expected_arch=x86_64; fi
           shopt -s nullglob
           references=("$baseline_dir"/*.dmg)
           if [[ "${#references[@]}" != 1 ]]; then
-            echo "::error::Expected exactly one baseline DMG, found ${#references[@]}"
-            exit 1
-          fi
-          images=(src-tauri/target/release/bundle/dmg/*.dmg)
-          if [[ "${#images[@]}" != 1 ]]; then
-            echo "::error::Expected exactly one DMG, found ${#images[@]}"
-            exit 1
+            echo "No baseline *_${PACKAGE_ARCH}.dmg asset in $baseline_tag; skipping reference diff."
+            exit 0
           fi
           python3 .github/scripts/verify-macos-dmg.py \
             --dmg "${images[0]}" \
@@ -602,7 +606,7 @@ jobs:
           # the delta-update file, and makes appimagetool generate the .zsync
           # file. The zsync glob matches the productName_version_amd64 file
           # name Tauri produces.
-          UPDATE_INFO="gh-releases-zsync|axpdev-lab|aeroftp|latest|AeroFTP_*_amd64.AppImage.zsync"
+          UPDATE_INFO="gh-releases-zsync|NextRankHQ|nexttransfer|latest|NextTransfer_*_amd64.AppImage.zsync"
           ARCH=x86_64 ./appimagetool --appimage-extract-and-run \
             --runtime-file runtime-x86_64 \
             -u "$UPDATE_INFO" \
@@ -693,9 +697,15 @@ jobs:
         if: matrix.target == 'windows'
         shell: pwsh
         run: |
-          $exe = "src-tauri/target/release/AeroFTP.exe"
+          $exe = "src-tauri/target/release/NextTransfer.exe"
           if (-not (Test-Path $exe)) {
-            Write-Host "::error::AeroFTP.exe not found at $exe"
+            $exe = "src-tauri/target/release/AeroFTP.exe"
+          }
+          if (-not (Test-Path $exe)) {
+            $exe = "src-tauri/target/release/aeroftp.exe"
+          }
+          if (-not (Test-Path $exe)) {
+            Write-Host "::error::GUI executable not found in src-tauri/target/release"
             exit 1
           }
 
@@ -713,7 +723,7 @@ jobs:
           }
 
           $version = (Get-Content src-tauri/tauri.conf.json | ConvertFrom-Json).version
-          $zipName = "AeroFTP-${version}-portable-windows-x64.zip"
+          $zipName = "NextTransfer-${version}-portable-windows-x64.zip"
           $stage = "src-tauri/target/release/bundle/portable-stage"
 
           # Stage the portable layout in a clean temp dir so Compress-Archive
@@ -721,6 +731,7 @@ jobs:
           if (Test-Path $stage) { Remove-Item -Recurse -Force $stage }
           New-Item -ItemType Directory -Path $stage | Out-Null
 
+          Copy-Item $exe                                              "$stage\NextTransfer.exe"
           Copy-Item $exe                                              "$stage\AeroFTP.exe"
           Copy-Item $exe                                              "$stage\aeroftp-app.exe"
           Copy-Item $cliExe                                           "$stage\aeroftp-cli.exe"
@@ -737,6 +748,35 @@ jobs:
           Write-Host "Created portable ZIP: $zipName ($size bytes)"
           Write-Host "Contents:"
           Get-ChildItem $stage | ForEach-Object { Write-Host "  $($_.Name) ($($_.Length) bytes)" }
+
+      - name: Upload Linux AppImage artifact
+        if: matrix.target == 'linux'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: NextTransfer-Linux-x64-AppImage
+          path: |
+            src-tauri/target/release/bundle/appimage/*.AppImage
+            src-tauri/target/release/bundle/appimage/*.AppImage.zsync
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Upload Linux DEB artifact
+        if: matrix.target == 'linux'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: NextTransfer-Linux-x64-DEB
+          path: src-tauri/target/release/bundle/deb/*.deb
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Upload Linux RPM artifact
+        if: matrix.target == 'linux'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: NextTransfer-Linux-x64-RPM
+          path: src-tauri/target/release/bundle/rpm/*.rpm
+          if-no-files-found: warn
+          retention-days: 7
 
       # Always upload platform installers as workflow artifacts. Tag runs used
       # to skip this and publish straight from the runner; that raced
@@ -758,6 +798,18 @@ jobs:
           if-no-files-found: warn
           retention-days: 1
 
+      - name: Upload Windows x64 artifact
+        if: matrix.target == 'windows'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: NextTransfer-Windows-x64
+          path: |
+            src-tauri/target/release/bundle/msi/*.msi
+            src-tauri/target/release/bundle/nsis/*.exe
+            src-tauri/target/release/bundle/NextTransfer-*-portable-*.zip
+          if-no-files-found: warn
+          retention-days: 7
+
       - name: Upload Windows installers
         if: matrix.target == 'windows'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
@@ -766,9 +818,18 @@ jobs:
           path: |
             src-tauri/target/release/bundle/msi/*.msi
             src-tauri/target/release/bundle/nsis/*.exe
-            src-tauri/target/release/bundle/AeroFTP-*-portable-*.zip
+            src-tauri/target/release/bundle/NextTransfer-*-portable-*.zip
           if-no-files-found: warn
           retention-days: 1
+
+      - name: Upload macOS named artifact
+        if: matrix.target == 'macos'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: ${{ matrix.arch == 'aarch64' && 'NextTransfer-macOS-AppleSilicon' || 'NextTransfer-macOS-Intel' }}
+          path: src-tauri/target/release/bundle/dmg/*.dmg
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Upload macOS installers
         if: matrix.target == 'macos'
@@ -880,7 +941,7 @@ jobs:
       - name: Upload binaries to GitHub Release
         uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3.0.4
         with:
-          name: 'AeroFTP ${{ github.ref_name }}'
+          name: 'NextTransfer ${{ github.ref_name }}'
           body: ${{ steps.changelog.outputs.notes }}
           draft: false
           prerelease: false
@@ -1178,7 +1239,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3.0.4
         with:
-          name: 'AeroFTP ${{ github.ref_name }}'
+          name: 'NextTransfer ${{ github.ref_name }}'
           draft: false
           prerelease: false
           # See the Linux upload step: published assets are immutable.
@@ -1208,18 +1269,10 @@ jobs:
           echo "Uploading $SNAP to Snap Store stable..."
           snapcraft upload --release=stable "$SNAP"
 
-  # Publish to Windows Package Manager (winget) on tag pushes
+  # Publish to Windows Package Manager (winget) on tag pushes (only when upstream repo)
   publish-winget:
-    # `publish-github-release` belongs in this list even though nothing is
-    # consumed from it as an artifact: the action below resolves the release by
-    # tag through the API, so the release has to exist before this job starts.
-    # Without the dependency the two run in parallel and this one can lose the
-    # race, which it did at v4.2.0: it asked for the release at 16:06:13 and the
-    # release was published at 16:06:26, so it failed with a bare 404 that reads
-    # like a token or identifier problem and is neither. The implicit success()
-    # on `needs` is what makes this enough.
     needs: [linux-validate, build-and-release, publish-github-release]
-    if: ${{ startsWith(github.ref, 'refs/tags/') && needs.linux-validate.result == 'success' }}
+    if: ${{ github.repository == 'axpdev-lab/aeroftp' && startsWith(github.ref, 'refs/tags/') && needs.linux-validate.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Publish to WinGet
@@ -1243,18 +1296,8 @@ jobs:
           token: ${{ secrets.WINGET_TOKEN }}
 
   publish-flatpark:
-    # FlatPark (https://flatpark.org) packages the official .deb as a Flatpak
-    # through extra-data and polls our releases once a day; this ping lets it
-    # open the update as soon as the release exists, instead of up to a day
-    # later. It has to live here rather than in an `on: release` workflow,
-    # because a release created with GITHUB_TOKEN triggers no other workflow.
-    # Same ordering reason as publish-winget: FlatPark validates the tag
-    # against the published release, so it must exist first. No token is sent:
-    # the endpoint takes the repository from its own catalog and only checks
-    # public state. continue-on-error keeps a FlatPark outage from marking the
-    # release run red; the daily poll still picks the release up.
     needs: [linux-validate, build-and-release, publish-github-release]
-    if: ${{ startsWith(github.ref, 'refs/tags/') && needs.linux-validate.result == 'success' }}
+    if: ${{ github.repository == 'axpdev-lab/aeroftp' && startsWith(github.ref, 'refs/tags/') && needs.linux-validate.result == 'success' }}
     runs-on: ubuntu-latest
     permissions: {}
     continue-on-error: true
