@@ -255,10 +255,6 @@ interface MyServersPanelProps {
 const EMPTY_STATE_CATEGORIES: { id: CatalogCategoryId; labelKey: string; icon: React.ReactNode; iconColor: string }[] = [
     { id: 'protocols', labelKey: 'introHub.category.protocols', icon: <ServerIcon size={18} />, iconColor: 'text-blue-500 dark:text-blue-400' },
     { id: 'object-storage', labelKey: 'introHub.category.objectStorage', icon: <Bucket size={18} />, iconColor: 'text-orange-500 dark:text-orange-400' },
-    { id: 'webdav', labelKey: 'introHub.category.webdav', icon: <Globe size={18} />, iconColor: 'text-emerald-500 dark:text-emerald-400' },
-    { id: 'cloud-storage', labelKey: 'introHub.category.cloudStorage', icon: <Cloud size={18} />, iconColor: 'text-sky-500 dark:text-sky-400' },
-    { id: 'media-services', labelKey: 'introHub.category.mediaServices', icon: <Camera size={18} />, iconColor: 'text-pink-500 dark:text-pink-400' },
-    { id: 'developer', labelKey: 'introHub.category.developer', icon: <Code size={18} />, iconColor: 'text-gray-500 dark:text-gray-400' },
 ];
 
 export function MyServersPanel({
@@ -1823,7 +1819,7 @@ export function MyServersPanel({
                                         </span>
                                         <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
                                     </div>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
+                                    <div className="grid grid-cols-2 gap-2.5 w-full">
                                         {EMPTY_STATE_CATEGORIES.map((cat) => (
                                             <button
                                                 key={cat.id}

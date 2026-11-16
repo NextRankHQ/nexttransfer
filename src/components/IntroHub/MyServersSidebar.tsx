@@ -106,7 +106,9 @@ export function MyServersSidebar({
         ...visibleQuickFilters(chipCounts),
         ...visiblePeerFilter(chipCounts, aeroShareEnabled),
     ];
-    const visibleProtocols = visibleProtocolFilters(chipCounts);
+    const visibleProtocols = visibleProtocolFilters(chipCounts).filter(
+        (id) => id === 'ftp' || id === 's3' || id === 'mtp',
+    );
 
     const borderSide = side === 'left' ? 'border-r' : 'border-l';
 

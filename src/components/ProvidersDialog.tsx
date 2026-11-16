@@ -318,6 +318,13 @@ export function ProvidersDialog({ isOpen, onClose }: ProvidersDialogProps) {
 
   if (!isOpen) return null;
 
+  const s3StartIdx = ALL_PROVIDERS.findIndex(p => p.section === 's3');
+  const webdavStartIdx = ALL_PROVIDERS.findIndex(p => p.section === 'webdav');
+  const visibleProviders = ALL_PROVIDERS.filter((p, i) =>
+    (import.meta.env.DEV || !isDevOnlyProvider(p.logoId)) &&
+    ((i >= s3StartIdx && i < webdavStartIdx) || p.logoId === 'hetzner')
+  );
+
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-[3vh]">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
@@ -397,7 +404,7 @@ export function ProvidersDialog({ isOpen, onClose }: ProvidersDialogProps) {
               </tr>
             </thead>
             <tbody>
-              {ALL_PROVIDERS.filter(p => import.meta.env.DEV || !isDevOnlyProvider(p.logoId)).map((provider, idx) => {
+              {visibleProviders.map((provider, idx) => {
                 const Logo = PROVIDER_LOGOS[provider.logoId];
                 const hasCoreOps = CORE_OPS.every(op => provider.base.includes(op));
                 const catalog = findCatalogByLogo(provider.catalogId ?? provider.logoId)
@@ -522,7 +529,7 @@ export function ProvidersDialog({ isOpen, onClose }: ProvidersDialogProps) {
             {t('providers.coreOpsLegend')}
           </p>
           <p className="text-[10px] text-gray-400 dark:text-gray-500">
-            {t('providers.totalCount', { count: ALL_PROVIDERS.length })}
+            {t('providers.totalCount', { count: visibleProviders.length })}
           </p>
         </div>
       </div>

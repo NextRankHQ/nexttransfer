@@ -395,7 +395,7 @@ export function buildDiscoverCategories(): DiscoverCategory[] {
  * source for the "+1" that used to be duplicated in DiscoverPanel's sidebar "All"
  * badge and its Protocols category badge (EF-16).
  */
-export const SYNTHETIC_TILE_COUNT = 1;
+export const SYNTHETIC_TILE_COUNT = 0;
 
 /**
  * Canonical total number of services in the Add Service catalog: every category
@@ -406,7 +406,9 @@ export const SYNTHETIC_TILE_COUNT = 1;
  * derive from here, and the AeroShare tile is counted because it is always rendered.
  */
 export function getTotalServiceCount(): number {
-    return buildDiscoverCategories().reduce((sum, cat) => sum + cat.count, 0) + SYNTHETIC_TILE_COUNT;
+    return buildDiscoverCategories()
+        .filter(cat => cat.id === 'protocols' || cat.id === 'object-storage')
+        .reduce((sum, cat) => sum + cat.count, 0) + SYNTHETIC_TILE_COUNT;
 }
 
 /**

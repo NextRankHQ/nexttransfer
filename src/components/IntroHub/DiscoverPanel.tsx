@@ -217,32 +217,16 @@ export function ServiceCard({
 export function DiscoverPanel({ onSelectProvider, query, onQueryChange }: DiscoverPanelProps) {
     const t = useTranslation();
     const introHubIconSize = useIntroHubIconSize();
-    const categories = useMemo(() => buildDiscoverCategories(), []);
-    // AeroShare (Beta, OFF by default): when on, a synthetic "AeroShare" tile is
-    // surfaced in Protocols + All. It is NOT a wire protocol, so it does not live
-    // in the provider catalog; clicking it opens the handshake dialog instead of
-    // the connection form (handleSelect intercepts protocol === 'peer').
-    // Always shown (AeroShare is always-on at launch): the tile is the primary
-    // discovery entry point, and selecting it opens the handshake dialog which
-    // auto-activates the feature on the first friend/share. The "Beta" tag stays
-    // on the dialog + Settings.
-    const peerTile = useMemo<DiscoverItem>(() => {
-        return {
-            id: 'aeroshare-peer',
-            name: t('aeroShare.feature'),
-            description: t('protocol.peerDesc'),
-            protocol: 'peer' as ProviderType,
-            // Uniform with the app's other end-to-end tiles (Filen/Internxt): the
-            // AeroShare channel seals content under a 256-bit key, so it carries
-            // the same "E2E 256-bit" secure badge (green + lock via
-            // isCipherStrengthBadge).
-            badge: 'E2E 256-bit',
-            source: 'protocol',
-        };
-    }, [t]);
+    const categories = useMemo(
+        () => buildDiscoverCategories().filter(c => c.id === 'protocols' || c.id === 'object-storage'),
+        [],
+    );
+    const peerTile: DiscoverItem | null = null;
     const [activeCategory, setActiveCategory] = useState<DiscoverCategoryId>(() => {
         const saved = localStorage.getItem(CATEGORY_KEY);
-        return (saved as DiscoverCategoryId) || 'protocols';
+        return saved === 'all' || saved === 'protocols' || saved === 'object-storage'
+            ? saved
+            : 'protocols';
     });
     const [viewMode, setViewMode] = useState<DiscoverViewMode>(() => {
         const saved = localStorage.getItem(VIEW_MODE_KEY);
@@ -358,9 +342,15 @@ export function DiscoverPanel({ onSelectProvider, query, onQueryChange }: Discov
     // and grid health dots match across every category.
     const catalogCompanies = useMemo<CatalogCompany[]>(() => {
         // Hide dev-only providers (Blomp, Google Photos) in production; show them in DEV.
-        const source = import.meta.env.DEV
+        // Restrict to Protocols and S3 / Object Storage methods only.
+        const source = (import.meta.env.DEV
             ? PROVIDER_CATALOG
-            : PROVIDER_CATALOG.filter(c => !isDevOnlyProvider(c.logoId));
+            : PROVIDER_CATALOG.filter(c => !isDevOnlyProvider(c.logoId)))
+            .map(c => ({
+                ...c,
+                protocols: c.protocols.filter(p => p.category === 'protocols' || p.category === 'object-storage'),
+            }))
+            .filter(c => c.protocols.length > 0);
         const base = activeCategory === 'all'
             ? source
             : source.filter(c => companyInCategory(c, activeCategory));
@@ -706,7 +696,7 @@ export function DiscoverPanel({ onSelectProvider, query, onQueryChange }: Discov
                     that made switching views feel like changing page (#347). */}
                 {(() => {
                     const customProfiles = CUSTOM_PROFILES.filter(
-                        (p) => activeCategory === 'all' || p.categories.includes(activeCategory),
+                        (p) => p.protocol !== 'webdav' && (activeCategory === 'all' || p.categories.includes(activeCategory)),
                     );
                     if (customProfiles.length === 0) return null;
                     return (

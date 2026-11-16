@@ -91,9 +91,13 @@ export const ProviderModeTabs: React.FC<ProviderModeTabsProps> = ({
     // hand — which is how FileLu ended up with FTP last here and second there.
     // Stable, on a copy: equal ranks keep the authored order and the exported
     // groups are never reordered under another consumer.
+    const ALLOWED_MODE_PROTOCOLS: ReadonlySet<ProviderType> = new Set([
+        'ftp', 'ftps', 'sftp', 'scp', 's3', 'azure', 'backblaze',
+    ]);
     const orderedModes = useMemo(() => {
         if (!group) return [];
         return group.modes
+            .filter((m) => ALLOWED_MODE_PROTOCOLS.has(m.protocol) && !m.bridgeKind)
             .map((m, i) => ({ m, i }))
             .sort((a, b) => {
                 const byRank = protocolBadgeRank(a.m.protocol) - protocolBadgeRank(b.m.protocol);
@@ -112,7 +116,7 @@ export const ProviderModeTabs: React.FC<ProviderModeTabsProps> = ({
         }
     }, [bridgeKind, onBridgeSaveBlockedChange, onBridgeUiStateChange]);
 
-    if (!group) {
+    if (!group || orderedModes.length <= 1) {
         return null;
     }
 
