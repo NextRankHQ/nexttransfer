@@ -324,7 +324,7 @@ export function MyServersPanel({
     // AeroShare (experimental, default OFF). When off, every friend surface
     // (cards, Add friend, dialog) is hidden; when on, friend cards get a live
     // drive-state badge fed by usePeerDriveStates.
-    const aeroShareEnabled = useAeroShareEnabled();
+    const aeroShareEnabled = false;
     const { states: peerStates, refresh: refreshPeerStates } = usePeerDriveStates(aeroShareEnabled);
     const [aeroShareDialog, setAeroShareDialog] = useState<{ mode: AeroShareMode; prefillAfid?: string; prefillAlias?: string; prefillShareFolder?: string } | null>(null);
     // Bumped after a handshake so the friend's freshly-saved profile reloads
@@ -1769,15 +1769,11 @@ export function MyServersPanel({
                 crossProfileSelectionCount={crossProfileSelection.length}
                 listDensity={density}
                 onToggleListDensity={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}
-                onAddFriend={() => setAeroShareDialog({ mode: 'receive' })}
-                aeroShareEnabled={aeroShareEnabled}
+                aeroShareEnabled={false}
             />
 
-            {/* Only under the AeroShare filter (not "All"): the shared-folder
-                list is part of the AeroShare world, and showing it on every tab
-                is too invasive. */}
             <SharedByMePanel
-                enabled={aeroShareEnabled && activeFilter === 'peer'}
+                enabled={false}
                 onShareFolder={() => setAeroShareDialog({ mode: 'share' })}
                 refreshKey={sharedRefresh}
             />
@@ -1800,13 +1796,6 @@ export function MyServersPanel({
                                 >
                                     <Plus size={18} />
                                     {t('introHub.addFirstServer')}
-                                </button>
-                                <button
-                                    onClick={() => setAeroShareDialog({ mode: 'receive' })}
-                                    className="flex items-center gap-2 px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-lg text-sm font-semibold shadow-sm transition-colors"
-                                >
-                                    <UserPlus size={18} />
-                                    {t('aeroShare.addFriend')}
                                 </button>
                             </div>
 

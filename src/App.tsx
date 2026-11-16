@@ -2333,7 +2333,7 @@ const App: React.FC = () => {
   const toast = useToast();
   const contextMenu = useContextMenu();
   // AeroShare flag: gates the folder-context "Share a folder" menu item.
-  const aeroShareEnabled = useAeroShareEnabled();
+  const aeroShareEnabled = false;
   const humanLog = useHumanizedLog();
   const activityLog = useActivityLog();
   // These functions keep their identity, while `toast` changes with the list

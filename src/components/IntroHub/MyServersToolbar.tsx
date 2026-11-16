@@ -156,17 +156,6 @@ export function MyServersToolbar({
                 </button>
             )}
 
-            {/* AeroShare "Add friend" - violet, only when the experimental flag is on */}
-            {onAddFriend && (
-                <button
-                    onClick={onAddFriend}
-                    className="p-2 rounded-lg bg-violet-50 dark:bg-violet-900/30 hover:bg-violet-100 dark:hover:bg-violet-800/40 text-violet-600 dark:text-violet-400 transition-colors"
-                    title={t('aeroShare.addFriend')}
-                >
-                    <UserPlus size={15} />
-                </button>
-            )}
-
             {onOpenMountManager && (
                 <button
                     onClick={onOpenMountManager}

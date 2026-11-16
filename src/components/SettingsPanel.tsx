@@ -954,7 +954,6 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
             label: t('settings.connection'),
             icon: <Wifi size={16} />,
         },
-        { id: 'aeroshare', label: 'AeroShare', icon: <Share2 size={16} /> },
         { id: 'aerocloud', label: 'AeroCloud', icon: <Cloud size={16} /> },
         {
             id: 'cloudproviders',

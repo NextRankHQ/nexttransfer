@@ -27,7 +27,7 @@ import { patchAeroShareSettings } from '../utils/aeroShare';
 
 export function AeroShareStatusButton() {
   const t = useTranslation();
-  const aeroShareEnabled = useAeroShareEnabled();
+  const aeroShareEnabled = false;
   const { receiving } = useAeroShareReceiveSettings();
   const [busy, setBusy] = useState(false);
 
