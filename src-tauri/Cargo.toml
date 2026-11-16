@@ -1,10 +1,10 @@
 [package]
 name = "aeroftp"
-version = "4.2.7"
-description = "AeroFTP - Fast, Beautiful, Reliable FTP Client"
-authors = ["axpdev"]
+version = "1.0.0"
+description = "NextTransfer - Fast, Modern, Reliable Desktop File Transfer Client by NextRankHQ"
+authors = ["NextRankHQ", "axpdev"]
 license = "GPL-3.0-or-later"
-repository = "https://github.com/axpdev-lab/aeroftp"
+repository = "https://github.com/NextRankHQ/nexttransfer"
 edition = "2021"
 # The floor the resolved graph actually needs, not a wish: measured with
 # `cargo metadata` as the highest `rust-version` any locked crate declares

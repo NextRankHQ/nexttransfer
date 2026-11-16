@@ -276,7 +276,7 @@ export const AccountLockScreen: React.FC<AccountLockScreenProps> = ({ onContinue
                         </div>
                     </div>
                     <div className="mt-1 text-center">
-                        <div className="text-lg font-semibold tracking-tight">AeroFTP</div>
+                        <div className="text-lg font-semibold tracking-tight">NextTransfer</div>
                         <div className="text-sm opacity-70">
                             {pendingUser ? t('accountLock.signInAs').replace('{name}', pendingUser.name) : t('accountLock.title')}
                         </div>
@@ -396,7 +396,7 @@ export const AccountLockScreen: React.FC<AccountLockScreenProps> = ({ onContinue
                                 <UserCog size={13} />
                                 {t('accountLock.manageUsers')}
                             </button>
-                            {appVersion && <span className="opacity-50">AeroFTP v{appVersion}</span>}
+                            {appVersion && <span className="opacity-50">NextTransfer v{appVersion}</span>}
                         </div>
                     </>
                 )}

@@ -1,13 +1,13 @@
 [Desktop Entry]
-Name=AeroFTP
+Name=NextTransfer
 GenericName=File Transfer Client
-Comment=Modern Multi-Protocol File Client with AI, Encryption and Cloud Storage
+Comment=Modern Multi-Protocol File Transfer Client by NextRankHQ
 Exec=aeroftp %f
 Icon=app.aeroftp.AeroFTP
 Terminal=false
 Type=Application
 Categories=Network;FileTransfer;
-Keywords=ftp;sftp;ftps;webdav;s3;transfer;file;sync;cloud;encryption;
+Keywords=ftp;sftp;ftps;webdav;s3;transfer;file;sync;cloud;encryption;nexttransfer;
 MimeType=application/x-aerovault;application/x-aeroftp;application/x-aeroftp-keystore;application/x-aerozip;application/x-aeroftp-script;application/zip;application/x-7z-compressed;application/vnd.rar;application/x-rar-compressed;application/x-tar;application/x-compressed-tar;application/gzip;application/x-xz;application/x-bzip2;x-scheme-handler/ftp;x-scheme-handler/ftps;x-scheme-handler/sftp;x-scheme-handler/scp;
 StartupNotify=true
-StartupWMClass=AeroFTP
+StartupWMClass=aeroftp

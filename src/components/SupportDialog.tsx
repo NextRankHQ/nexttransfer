@@ -194,7 +194,7 @@ export const SupportDialog: React.FC<SupportDialogProps> = ({ isOpen, onClose })
                 >
                     <div className="flex items-center gap-2 pointer-events-none">
                         <Heart size={18} className="text-pink-500" />
-                        <h2 className="text-base font-semibold">{t('support.title') || 'Support AeroFTP'}</h2>
+                        <h2 className="text-base font-semibold">{t('support.title') || 'Support NextTransfer'}</h2>
                     </div>
                     <button onClick={onClose} className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700" title={t('common.close')}>
                         <X size={16} />
@@ -227,7 +227,7 @@ export const SupportDialog: React.FC<SupportDialogProps> = ({ isOpen, onClose })
                             ))}
                             {/* Star on GitHub - free support */}
                             <button
-                                onClick={() => openUrl('https://github.com/axpdev-lab/aeroftp')}
+                                onClick={() => openUrl('https://github.com/NextRankHQ/nexttransfer')}
                                 className="flex flex-col items-center gap-2 p-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700/50 hover:bg-amber-100 dark:hover:bg-amber-900/30 hover:border-amber-300 dark:hover:border-amber-600 transition-all hover:scale-105"
                             >
                                 <Star size={24} className="text-amber-500" />

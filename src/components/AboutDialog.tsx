@@ -188,7 +188,7 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
     const technicalText = useMemo(() => {
         if (!systemInfo) return '';
         const lines = [
-            `AeroFTP ${appVersion}`,
+            `NextTransfer ${appVersion}`,
             '',
             `--- ${t('about.buildInfo')} ---`,
             `Tauri: ${systemInfo.tauri_version}`,
@@ -235,10 +235,10 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                     <div className="flex items-center gap-2.5 pointer-events-none">
                         <img
                             src="/icons/AeroFTP_simbol_color_512x512.png"
-                            alt="AeroFTP"
+                            alt="NextTransfer"
                             className="w-6 h-6 object-contain"
                         />
-                        <h2 className="text-base font-semibold font-mono">AeroFTP</h2>
+                        <h2 className="text-base font-semibold font-mono">NextTransfer</h2>
                     </div>
                     <button onClick={onClose} className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700" title={t('common.close')}>
                         <X size={16} />
@@ -275,7 +275,7 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                                 <div className="w-16 h-16 mx-auto mb-2 bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-sm flex items-center justify-center p-1.5 border border-gray-200 dark:border-gray-700">
                                     <img
                                         src="/icons/AeroFTP_simbol_color_512x512.png"
-                                        alt="AeroFTP"
+                                        alt="NextTransfer"
                                         className="w-full h-full object-contain"
                                     />
                                 </div>
@@ -345,7 +345,7 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                             {/* Credits */}
                             <div className="text-center pt-2 border-t border-gray-200 dark:border-gray-800 space-y-1">
                                 <p className="text-xs text-gray-500 flex items-center justify-center gap-1 font-mono">
-                                    {t('about.madeWith')} <Heart size={12} className="text-red-500" /> {t('about.madeBy', { author: 'AxpDev' })}
+                                    {t('about.madeWith')} <Heart size={12} className="text-red-500" /> {t('about.madeBy', { author: 'NextRankHQ' })}
                                 </p>
                                 <p className="text-[10px] text-gray-400 dark:text-gray-600 font-mono">
                                     {t('about.aiCredits')}
@@ -436,7 +436,7 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                             {/* Links */}
                             <div className="flex justify-center gap-3">
                                 <button
-                                    onClick={() => openUrl('https://github.com/axpdev-lab/aeroftp')}
+                                    onClick={() => openUrl('https://github.com/NextRankHQ/nexttransfer')}
                                     className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg transition-colors text-sm text-gray-600 dark:text-gray-300"
                                 >
                                     <Github size={16} />
@@ -450,7 +450,7 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                                     SourceForge
                                 </button>
                                 <button
-                                    onClick={() => openUrl('mailto:aeroftp@axpdev.it')}
+                                    onClick={() => openUrl('https://nextrankhq.com')}
                                     className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg transition-colors text-sm text-gray-600 dark:text-gray-300"
                                 >
                                     <Mail size={16} />
@@ -461,18 +461,18 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                             {/* Website & Docs */}
                             <div className="flex justify-center gap-4">
                                 <button
-                                    onClick={() => openUrl('https://aeroftp.app')}
+                                    onClick={() => openUrl('https://nextrankhq.com')}
                                     className="inline-flex items-center gap-1.5 text-xs text-blue-500 dark:text-cyan-500 hover:text-blue-400 dark:hover:text-cyan-400 transition-colors font-mono"
                                 >
                                     <ExternalLink size={12} />
-                                    aeroftp.app
+                                    nextrankhq.com
                                 </button>
                                 <button
-                                    onClick={() => openUrl('https://docs.aeroftp.app')}
+                                    onClick={() => openUrl('https://github.com/NextRankHQ/nexttransfer')}
                                     className="inline-flex items-center gap-1.5 text-xs text-blue-500 dark:text-cyan-500 hover:text-blue-400 dark:hover:text-cyan-400 transition-colors font-mono"
                                 >
                                     <ExternalLink size={12} />
-                                    docs.aeroftp.app
+                                    github.com/NextRankHQ/nexttransfer
                                 </button>
                             </div>
 
@@ -483,14 +483,14 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                                 </p>
                                 <div className="flex justify-center gap-3">
                                     <button
-                                        onClick={() => openUrl('https://www.aeroftp.app/page/report-issue')}
+                                        onClick={() => openUrl('https://github.com/NextRankHQ/nexttransfer/issues')}
                                         className="flex items-center gap-1.5 px-3 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg transition-colors text-xs text-gray-600 dark:text-gray-300"
                                     >
                                         <ExternalLink size={12} />
                                         {t('about.reportIssue')}
                                     </button>
                                     <button
-                                        onClick={() => openUrl('https://docs.aeroftp.app')}
+                                        onClick={() => openUrl('https://github.com/NextRankHQ/nexttransfer#readme')}
                                         className="flex items-center gap-1.5 px-3 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg transition-colors text-xs text-gray-600 dark:text-gray-300"
                                     >
                                         <ExternalLink size={12} />

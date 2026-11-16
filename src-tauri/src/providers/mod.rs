@@ -100,7 +100,7 @@ pub mod zoho_workdrive;
 
 /// User-Agent sent with every HTTP request (auto-derived from Cargo.toml version).
 /// Used by all providers that make HTTP calls (S3, OAuth, REST APIs).
-pub const AEROFTP_USER_AGENT: &str = concat!("AeroFTP/", env!("CARGO_PKG_VERSION"));
+pub const AEROFTP_USER_AGENT: &str = concat!("NextTransfer/", env!("CARGO_PKG_VERSION"));
 
 /// User-Agent sent by the shared WebDAV client (major version only).
 /// pCloud and other WebDAV servers fingerprint the User-Agent as a device

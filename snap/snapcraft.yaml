@@ -1,7 +1,7 @@
 name: aeroftp
-title: AeroFTP
-version: '4.2.7'
-summary: Modern Multi-Protocol File Transfer & Cloud Client for Humans and Agents
+title: NextTransfer
+version: '1.0.0'
+summary: Fast, Modern, Reliable Desktop File Transfer Client by NextRankHQ
 description: |
   AeroFTP is a modern file transfer client that goes beyond traditional FTP.
   Connect to FTP/FTPS servers, SFTP, SCP, WebDAV, S3-compatible storage, and major
@@ -73,10 +73,10 @@ grade: stable
 confinement: strict
 compression: lzo
 
-contact: https://github.com/axpdev-lab/aeroftp/discussions
-issues: https://github.com/axpdev-lab/aeroftp/issues
-source-code: https://github.com/axpdev-lab/aeroftp
-website: https://aeroftp.app
+contact: https://github.com/NextRankHQ/nexttransfer/issues
+issues: https://github.com/NextRankHQ/nexttransfer/issues
+source-code: https://github.com/NextRankHQ/nexttransfer
+website: https://nextrankhq.com
 license: GPL-3.0-or-later
 
 architectures:

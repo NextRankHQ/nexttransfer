@@ -2489,13 +2489,13 @@ struct UpdateDownloadProgress {
 }
 
 const GITHUB_RELEASES_API_URL: &str =
-    "https://api.github.com/repos/axpdev-lab/aeroftp/releases/latest";
+    "https://api.github.com/repos/NextRankHQ/nexttransfer/releases/latest";
 const GITHUB_RELEASES_HOST: &str = "github.com";
-const GITHUB_RELEASES_OWNER: &str = "axpdev-lab";
-const GITHUB_RELEASES_REPO: &str = "aeroftp";
+const GITHUB_RELEASES_OWNER: &str = "NextRankHQ";
+const GITHUB_RELEASES_REPO: &str = "nexttransfer";
 const SIGSTORE_OIDC_ISSUER: &str = "https://token.actions.githubusercontent.com";
 const SIGSTORE_WORKFLOW_IDENTITY_PREFIX: &str =
-    "https://github.com/axpdev-lab/aeroftp/.github/workflows/build.yml@refs/tags/";
+    "https://github.com/NextRankHQ/nexttransfer/.github/workflows/build.yml@refs/tags/";
 
 // ============ Updater Command =====
 /// Directory where self-extracting auto-update artifacts (portable .zip,
@@ -12085,7 +12085,7 @@ fn open_extract_window_on_main(app: &AppHandle, mode: &str, path: &str) {
     };
 
     let builder = WebviewWindowBuilder::new(app, &label, url)
-        .title("AeroFTP")
+        .title("NextTransfer")
         .inner_size(460.0, 320.0)
         .min_inner_size(380.0, 240.0)
         .resizable(false)
@@ -13264,7 +13264,7 @@ fn rebuild_menu_on_main(
     let quit = MenuItem::with_id(
         &app,
         "quit",
-        get("quit", "Quit AeroFTP"),
+        get("quit", "Quit NextTransfer"),
         true,
         accel("CmdOrCtrl+Q"),
     )
@@ -13272,7 +13272,7 @@ fn rebuild_menu_on_main(
     let about = MenuItem::with_id(
         &app,
         "about",
-        get("about", "About AeroFTP"),
+        get("about", "About NextTransfer"),
         true,
         None::<&str>,
     )
@@ -22297,7 +22297,7 @@ pub fn run() {
         // Setting prgname here (before any GTK/WebKit init) makes WM_CLASS
         // deterministic and fixes the generic-icon-after-update bug.
         gtk::glib::set_prgname(Some("aeroftp"));
-        gtk::glib::set_application_name("AeroFTP");
+        gtk::glib::set_application_name("NextTransfer");
     }
 
     // Serve frontend via real HTTP server to fix WebKitGTK rendering issues.
@@ -22714,7 +22714,7 @@ pub fn run() {
             let (initial_w, initial_h) = computed_initial_inner_size(app.handle());
 
             let main_builder = WebviewWindowBuilder::new(app, "main", main_url)
-                .title("AeroFTP")
+                .title("NextTransfer")
                 .inner_size(initial_w, initial_h)
                 .min_inner_size(MAIN_MIN_INNER_W, MAIN_MIN_INNER_H)
                 .center()
@@ -22807,8 +22807,8 @@ pub fn run() {
             };
 
             // Create menu items
-            let quit = MenuItem::with_id(app, "quit", "Quit AeroFTP", true, accel("CmdOrCtrl+Q"))?;
-            let about = MenuItem::with_id(app, "about", "About AeroFTP", true, None::<&str>)?;
+            let quit = MenuItem::with_id(app, "quit", "Quit NextTransfer", true, accel("CmdOrCtrl+Q"))?;
+            let about = MenuItem::with_id(app, "about", "About NextTransfer", true, None::<&str>)?;
             let settings =
                 MenuItem::with_id(app, "settings", "Settings...", true, accel("CmdOrCtrl+,"))?;
             let refresh = MenuItem::with_id(app, "refresh", "Refresh", true, accel("CmdOrCtrl+R"))?;
@@ -23008,7 +23008,7 @@ pub fn run() {
                 // mode so storage events emitted on first load don't fight a second
                 // identifier-scoped folder.
                 let splash_builder = WebviewWindowBuilder::new(app, "splashscreen", splash_url)
-                    .title("AeroFTP")
+                    .title("NextTransfer")
                     .inner_size(420.0, 340.0)
                     .resizable(false)
                     .decorations(false)
@@ -23114,7 +23114,7 @@ pub fn run() {
                     true,
                     None::<&str>,
                 )?,
-                MenuItem::with_id(app, "tray_show", "Show AeroFTP", true, None::<&str>)?,
+                MenuItem::with_id(app, "tray_show", "Show NextTransfer", true, None::<&str>)?,
                 MenuItem::with_id(app, "tray_quit", "Quit", true, None::<&str>)?,
             );
             #[cfg(not(target_os = "linux"))]
@@ -23165,7 +23165,7 @@ pub fn run() {
                 IconMenuItem::with_id(
                     app,
                     "tray_show",
-                    "Show AeroFTP",
+                    "Show NextTransfer",
                     true,
                     Some(tray_badge::tray_menu_icon(tray_badge::TrayMenuGlyph::Show)),
                     None::<&str>,

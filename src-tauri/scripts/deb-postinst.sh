@@ -96,6 +96,7 @@ done
 # Patch Tauri-generated desktop file: add MimeType and %f argument
 # Tauri 2 does not propagate fileAssociations to the .desktop file
 for DESKTOP_FILE in \
+    "$(root_path /usr/share/applications/NextTransfer.desktop)" \
     "$(root_path /usr/share/applications/AeroFTP.desktop)" \
     "$(root_path /usr/share/applications/app.aeroftp.AeroFTP.desktop)" \
     "$(root_path /usr/share/applications/aeroftp.desktop)"

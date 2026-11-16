@@ -53,6 +53,7 @@ ln -sfn aeroftp "$BIN_DIR/aftp"
 ln -sfn aeroftp "$BIN_DIR/aeroftp-cli"
 
 for desktop in \
+    "$WORK/pkg/usr/share/applications/NextTransfer.desktop" \
     "$WORK/pkg/usr/share/applications/AeroFTP.desktop" \
     "$WORK/pkg/usr/share/applications/app.aeroftp.AeroFTP.desktop" \
     "$WORK/pkg/usr/share/applications/aeroftp.desktop"

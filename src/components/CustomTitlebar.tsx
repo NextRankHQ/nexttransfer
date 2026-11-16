@@ -323,8 +323,8 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
     const helpMenu: MenuEntry[] = [
         { label: t('menu.shortcuts'), shortcut: 'F1', onClick: onShowShortcuts },
         { separator: true },
-        { label: t('menu.website'), onClick: () => openUrl('https://aeroftp.app') },
-        { label: t('menu.documentation'), onClick: () => openUrl('https://docs.aeroftp.app') },
+        { label: t('menu.website'), onClick: () => openUrl('https://nextrankhq.com') },
+        { label: t('menu.documentation'), onClick: () => openUrl('https://github.com/NextRankHQ/nexttransfer#readme') },
         { separator: true },
         { label: t('menu.checkForUpdates'), onClick: onCheckForUpdates },
         { separator: true },
@@ -369,11 +369,11 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
             >
                 <img
                     src={iconSrc}
-                    alt="AeroFTP" width={18} height={18}
+                    alt="NextTransfer" width={18} height={18}
                     className={`shrink-0 object-contain ${activityCls}`}
                 />
                 <span className="text-xs font-bold tracking-tight text-[var(--color-text-primary)]">
-                    AeroFTP
+                    NextTransfer
                 </span>
             </div>
 

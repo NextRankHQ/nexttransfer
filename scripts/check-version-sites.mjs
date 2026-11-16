@@ -183,6 +183,22 @@ const ACCEPTED = new Map([
     'docs/COMMAND-INVENTORY.json',
     'regenerated from the binary, and its staleness is already guarded by `aeroftp-cli inventory --check` in cli-smoke.yml',
   ],
+  [
+    'src-tauri/peer-l0/Cargo.lock',
+    'third-party crate versions inside peer-l0 lockfile that happen to equal 1.0.0',
+  ],
+  [
+    'src-tauri/src/mcp_client_config.rs',
+    'MCP protocol schema version fixture in unit tests (1.0.0)',
+  ],
+  [
+    'src-tauri/src/mcp_client_install.rs',
+    'MCP package version fixture in unit tests (1.0.0)',
+  ],
+  [
+    'src-tauri/src/mcp_client_sandbox.rs',
+    'MCP sandbox test fixture version (1.0.0)',
+  ],
 ]);
 
 // Second sweep, and it exists because the first one asked a leading question.

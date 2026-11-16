@@ -5,8 +5,8 @@
     <id>com.aeroftp.AeroFTP</id>
   </replaces>
 
-  <name>AeroFTP</name>
-  <summary>Modern Multi-Protocol File Client with AI, Encryption and Cloud Storage</summary>
+  <name>NextTransfer</name>
+  <summary>Modern Multi-Protocol File Transfer Client by NextRankHQ</summary>
 
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
@@ -81,13 +81,12 @@
     </screenshot>
   </screenshots>
 
-  <url type="homepage">https://github.com/axpdev-lab/aeroftp</url>
-  <url type="bugtracker">https://github.com/axpdev-lab/aeroftp/issues</url>
-  <url type="vcs-browser">https://github.com/axpdev-lab/aeroftp</url>
-  <url type="donation">https://github.com/sponsors/axpnet</url>
+  <url type="homepage">https://nextrankhq.com</url>
+  <url type="bugtracker">https://github.com/NextRankHQ/nexttransfer/issues</url>
+  <url type="vcs-browser">https://github.com/NextRankHQ/nexttransfer</url>
 
-  <developer id="com.aeroftp">
-    <name>Ale (axpdev)</name>
+  <developer id="com.nextrankhq">
+    <name>NextRankHQ</name>
   </developer>
 
   <provides>
@@ -146,6 +145,11 @@
   </languages>
 
   <releases>
+    <release version="1.0.0" date="2026-11-16">
+      <description>
+        <p>Initial release of NextTransfer 1.0.0 by NextRankHQ — modern, cross-platform desktop file transfer client supporting FTP, FTPS, SFTP, and Amazon S3.</p>
+      </description>
+    </release>
     <release version="4.2.7" date="2026-11-08">
       <description>
         <p>Network trust hardening, Tigris and Fastly Object Storage S3 presets, native MEGA bulk transfers, and imported profile security reviews.</p>

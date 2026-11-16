@@ -335,7 +335,7 @@ export function ProvidersDialog({ isOpen, onClose }: ProvidersDialogProps) {
           className="flex items-center justify-between px-5 py-3 border-b border-gray-200 dark:border-gray-700 shrink-0 cursor-grab active:cursor-grabbing"
         >
           <div className="flex items-center gap-2.5 pointer-events-none">
-            <img src="/icons/AeroFTP_simbol_color_512x512.png" alt="AeroFTP" className="w-6 h-6 object-contain" />
+            <img src="/icons/AeroFTP_simbol_color_512x512.png" alt="NextTransfer" className="w-6 h-6 object-contain" />
             <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">
               {t('providers.title')}
             </h2>

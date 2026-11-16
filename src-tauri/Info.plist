@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
     <key>NSLocalNetworkUsageDescription</key>
-    <string>AeroFTP requires access to the local network to connect to local servers (FTP, SFTP, WebDAV, SMB) and discover nearby AeroShare peers.</string>
+    <string>NextTransfer requires access to the local network to connect to local servers (FTP, FTPS, SFTP, WebDAV, S3) and discover nearby peers.</string>
 </dict>
 </plist>

@@ -1771,8 +1771,8 @@ const App: React.FC = () => {
     const activeSession = sessions.find(s => s.id === activeSessionId);
     const sessionName = (activeSession?.serverName || '').trim();
     const title = isConnected && sessionName
-      ? `AeroFTP${versionTag} - ${sessionName}`
-      : `AeroFTP${versionTag}`;
+      ? `NextTransfer${versionTag} - ${sessionName}`
+      : `NextTransfer${versionTag}`;
     getCurrentWindow().setTitle(title).catch(() => { /* non-fatal */ });
   }, [isConnected, sessions, activeSessionId, appVersion]);
 
@@ -18522,7 +18522,7 @@ const App: React.FC = () => {
               <div className="flex flex-col">
                 <span className="font-semibold flex items-center gap-1.5">
                   <Download size={14} />
-                  AeroFTP v{updateAvailable.latest_version} {t('statusbar.updateAvailable')}
+                  NextTransfer v{updateAvailable.latest_version} {t('statusbar.updateAvailable')}
                 </span>
                 <span className="text-xs opacity-80">
                   {t('ui.currentVersion', { version: updateAvailable.current_version, format: updateAvailable.install_format?.toUpperCase() })}
@@ -18713,7 +18713,7 @@ const App: React.FC = () => {
               </p>
               <p className="text-white/60 text-sm mt-1">{t('update.installingDesc')}</p>
               {updateAvailable?.latest_version && (
-                <p className="text-white/40 text-xs mt-2">AeroFTP v{updateAvailable.latest_version}</p>
+                <p className="text-white/40 text-xs mt-2">NextTransfer v{updateAvailable.latest_version}</p>
               )}
             </div>
             {/* Verification result echoed in the centered overlay (not only the
