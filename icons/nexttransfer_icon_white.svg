@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Monochrome White Symbol for System Tray & High-Contrast Surfaces -->
+  <path d="M 336 330 L 688 694" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="84" stroke-linecap="round" />
+  <rect x="288" y="280" width="96" height="480" rx="48" fill="#FFFFFF" />
+  <path d="M 200 396 L 336 244 L 472 396" fill="none" stroke="#FFFFFF" stroke-width="92" stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="640" y="264" width="96" height="480" rx="48" fill="#FFFFFF" />
+  <path d="M 552 628 L 688 780 L 824 628" fill="none" stroke="#FFFFFF" stroke-width="92" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320">
+  <defs>
+    <linearGradient id="bannerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060D1A" />
+      <stop offset="50%" stop-color="#0B192C" />
+      <stop offset="100%" stop-color="#0F294A" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <linearGradient id="bridgeGrad" x1="25%" y1="25%" x2="75%" y2="75%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="320" rx="24" fill="url(#bannerBg)" />
+  <circle cx="1050" cy="60" r="240" fill="#0EA5E9" fill-opacity="0.08" />
+  <circle cx="160" cy="280" r="180" fill="#22D3EE" fill-opacity="0.06" />
+  <g transform="translate(80, 56) scale(0.203125)">
+    <rect x="48" y="48" width="928" height="928" rx="216" ry="216" fill="#09152B" stroke="#38BDF8" stroke-opacity="0.45" stroke-width="16" />
+    <path d="M 336 330 L 688 694" stroke="url(#bridgeGrad)" stroke-width="76" stroke-linecap="round" />
+    <rect x="292" y="290" width="88" height="464" rx="44" fill="#FFFFFF" />
+    <path d="M 212 396 L 336 256 L 460 396" fill="none" stroke="#FFFFFF" stroke-width="84" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="644" y="270" width="88" height="464" rx="44" fill="url(#cyanGrad)" />
+    <path d="M 564 628 L 688 768 L 812 628" fill="none" stroke="url(#cyanGrad)" stroke-width="84" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="336" cy="340" r="24" fill="#09152B" />
+    <circle cx="688" cy="684" r="24" fill="#09152B" />
+  </g>
+  <text x="328" y="156" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="76" font-weight="800" letter-spacing="-1.5">
+    <tspan fill="#FFFFFF">Next</tspan><tspan fill="#38BDF8">Transfer</tspan>
+  </text>
+  <text x="332" y="206" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="24" font-weight="500" fill="#94A3B8">
+    Fast, Secure, Modern File Transfer Client — FTP · FTPS · SFTP · Amazon S3
+  </text>
+  <text x="332" y="246" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#38BDF8" letter-spacing="2">
+    MAINTAINED BY NEXTRANKHQ · NEXTRANKHQ.COM
+  </text>
+</svg>

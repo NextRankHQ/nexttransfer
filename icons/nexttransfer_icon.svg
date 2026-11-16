@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Deep Navy Foundation Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1F3C" />
+      <stop offset="55%" stop-color="#09152B" />
+      <stop offset="100%" stop-color="#050C1A" />
+    </linearGradient>
+
+    <!-- Subtle Outer Rim Gradient (for visibility on both dark & light themes) -->
+    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.55" />
+      <stop offset="50%" stop-color="#1E3A5F" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0.5" />
+    </linearGradient>
+
+    <!-- Electric Cyan Accent Gradient -->
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+
+    <!-- Diagonal Bridge Gradient (White to Electric Cyan) -->
+    <linearGradient id="bridgeGrad" x1="25%" y1="25%" x2="75%" y2="75%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="45%" stop-color="#7DD3FC" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+
+    <!-- Subtle Ambient Cyan Glow -->
+    <radialGradient id="ambientGlow" cx="50%" cy="50%" r="48%">
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect x="48" y="48" width="928" height="928" rx="216" ry="216" fill="url(#bgGrad)" />
+  <rect x="48" y="48" width="928" height="928" rx="216" ry="216" fill="url(#ambientGlow)" />
+  <rect x="54" y="54" width="916" height="916" rx="210" ry="210" fill="none" stroke="url(#rimGrad)" stroke-width="12" />
+
+  <!-- Geometric Diagonal Data Bridge (forms the 'N' crossbar between Upload and Download streams) -->
+  <path d="M 336 330 L 688 694" stroke="url(#bridgeGrad)" stroke-width="76" stroke-linecap="round" />
+
+  <!-- Left Ascending Upload Stream (Crisp White) -->
+  <!-- Vertical Stem -->
+  <rect x="292" y="290" width="88" height="464" rx="44" fill="#FFFFFF" />
+  <!-- Ascending Arrowhead -->
+  <path d="M 212 396 L 336 256 L 460 396" fill="none" stroke="#FFFFFF" stroke-width="84" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Right Descending Download Stream (Electric Cyan) -->
+  <!-- Vertical Stem -->
+  <rect x="644" y="270" width="88" height="464" rx="44" fill="url(#cyanGrad)" />
+  <!-- Descending Arrowhead -->
+  <path d="M 564 628 L 688 768 L 812 628" fill="none" stroke="url(#cyanGrad)" stroke-width="84" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Connection Nodes -->
+  <circle cx="336" cy="340" r="24" fill="#09152B" />
+  <circle cx="688" cy="684" r="24" fill="#09152B" />
+</svg>
