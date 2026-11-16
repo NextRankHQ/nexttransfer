@@ -13378,18 +13378,20 @@ fn rebuild_menu_on_main(
     )
     .map_err(|e| e.to_string())?;
 
-    let devtools_submenu = Submenu::with_id_and_items(
+    let view_menu = Submenu::with_id_and_items(
         &app,
-        "menu_devtools",
-        get("devtools", "DevTools"),
+        "menu_view",
+        get("view", "View"),
         true,
         &[
+            &refresh,
+            &PredefinedMenuItem::separator(&app).map_err(|e| e.to_string())?,
             &MenuItem::with_id(
                 &app,
-                "toggle_devtools",
-                get("toggleDevtools", "Toggle DevTools"),
+                "toggle_theme",
+                get("toggleTheme", "Toggle Theme"),
                 true,
-                accel("CmdOrCtrl+Shift+D"),
+                accel("CmdOrCtrl+T"),
             )
             .map_err(|e| e.to_string())?,
             &PredefinedMenuItem::separator(&app).map_err(|e| e.to_string())?,
@@ -13409,36 +13411,6 @@ fn rebuild_menu_on_main(
                 accel("CmdOrCtrl+2"),
             )
             .map_err(|e| e.to_string())?,
-            &MenuItem::with_id(
-                &app,
-                "toggle_agent",
-                get("toggleAgent", "Toggle Agent"),
-                true,
-                accel("CmdOrCtrl+3"),
-            )
-            .map_err(|e| e.to_string())?,
-        ],
-    )
-    .map_err(|e| e.to_string())?;
-
-    let view_menu = Submenu::with_id_and_items(
-        &app,
-        "menu_view",
-        get("view", "View"),
-        true,
-        &[
-            &refresh,
-            &PredefinedMenuItem::separator(&app).map_err(|e| e.to_string())?,
-            &MenuItem::with_id(
-                &app,
-                "toggle_theme",
-                get("toggleTheme", "Toggle Theme"),
-                true,
-                accel("CmdOrCtrl+T"),
-            )
-            .map_err(|e| e.to_string())?,
-            &PredefinedMenuItem::separator(&app).map_err(|e| e.to_string())?,
-            &devtools_submenu,
         ],
     )
     .map_err(|e| e.to_string())?;
@@ -22875,18 +22847,20 @@ pub fn run() {
             )?;
 
             // View menu
-            let devtools_submenu = Submenu::with_id_and_items(
+            let view_menu = Submenu::with_id_and_items(
                 app,
-                "menu_devtools",
-                "DevTools",
+                "menu_view",
+                "View",
                 true,
                 &[
+                    &refresh,
+                    &PredefinedMenuItem::separator(app)?,
                     &MenuItem::with_id(
                         app,
-                        "toggle_devtools",
-                        "Toggle DevTools",
+                        "toggle_theme",
+                        "Toggle Theme",
                         true,
-                        accel("CmdOrCtrl+Shift+D"),
+                        accel("CmdOrCtrl+T"),
                     )?,
                     &PredefinedMenuItem::separator(app)?,
                     &MenuItem::with_id(
@@ -22903,41 +22877,6 @@ pub fn run() {
                         true,
                         accel("CmdOrCtrl+2"),
                     )?,
-                    &MenuItem::with_id(
-                        app,
-                        "toggle_agent",
-                        "Toggle Agent",
-                        true,
-                        accel("CmdOrCtrl+3"),
-                    )?,
-                ],
-            )?;
-
-            let view_menu = Submenu::with_id_and_items(
-                app,
-                "menu_view",
-                "View",
-                true,
-                &[
-                    &MenuItem::with_id(
-                        app,
-                        "toggle_aerofile",
-                        "AeroFile",
-                        true,
-                        accel("CmdOrCtrl+L"),
-                    )?,
-                    &PredefinedMenuItem::separator(app)?,
-                    &refresh,
-                    &PredefinedMenuItem::separator(app)?,
-                    &MenuItem::with_id(
-                        app,
-                        "toggle_theme",
-                        "Toggle Theme",
-                        true,
-                        accel("CmdOrCtrl+T"),
-                    )?,
-                    &PredefinedMenuItem::separator(app)?,
-                    &devtools_submenu,
                 ],
             )?;
 

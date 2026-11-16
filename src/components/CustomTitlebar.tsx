@@ -305,19 +305,11 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
         },
         { label: t('menu.toggleTheme'), shortcut: 'Ctrl+T', onClick: onToggleTheme },
         { separator: true },
-        { label: t('menu.toggleDevtools'), shortcut: 'Ctrl+Shift+D', onClick: onToggleDevTools },
         { label: t('menu.toggleEditor'), shortcut: 'Ctrl+1', onClick: onToggleEditor },
         { label: t('menu.toggleTerminal'), shortcut: 'Ctrl+2', onClick: onToggleTerminal },
-        { label: t('menu.toggleAgent'), shortcut: 'Ctrl+3', onClick: onToggleAgent },
         { separator: true },
         { label: t('menu.activityLog'), shortcut: 'Ctrl+Shift+L', onClick: onToggleActivityLog },
         { label: t('menu.debugPanel'), shortcut: 'Ctrl+Shift+M', onClick: onToggleDebugPanel },
-        { separator: true },
-        // AeroSync: unified Compare + Plan + Sync modal. Opens at the
-        // Compare tab so the F4 shortcut keeps its legacy meaning (diff view
-        // first); the Plan and Sync tabs are reachable from the tab strip
-        // inside the dialog and through the command palette.
-        { label: t('menu.aerosync') || 'AeroSync...', shortcut: 'F4', onClick: () => onShowAeroSync('compare') },
     ];
 
     const helpMenu: MenuEntry[] = [
@@ -329,7 +321,6 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
         { label: t('menu.checkForUpdates'), onClick: onCheckForUpdates },
         { separator: true },
         { label: t('menu.providers'), onClick: onShowProviders },
-        { label: t('menu.mcp'), onClick: onShowMcp },
         { separator: true },
         { label: t('menu.support'), onClick: onShowSupport },
         { label: appVersion ? `${t('menu.about')} ${appVersion}` : t('menu.about'), onClick: onShowAbout },
@@ -433,32 +424,8 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
                 <Heart size={14} className="text-blue-500 fill-current" />
             </button>
 
-            {/* Write a Review (SourceForge) */}
-            <button
-                onClick={() => openUrl('https://sourceforge.net/software/product/AeroFTP/reviews/new')}
-                className="h-6 flex items-center gap-1 px-2 rounded bg-green-600/80 hover:bg-green-600 text-white text-xs font-medium transition-colors cursor-pointer"
-                title={t('about.sourceforgeReviews')}
-            >
-                <SourceForgeLogo size={10} />
-                {t('about.writeReview')}
-            </button>
-
-            <div className="w-px h-4 bg-[var(--color-border)] mx-1" />
-
             {/* Theme Toggle */}
             <ThemeToggle theme={theme} setTheme={setTheme} />
-
-            {/* AeroShare (Beta): +friend. Always visible (Discovery is always-on
-                and this is the primary entry point; adding a friend or sharing a
-                folder auto-activates AeroShare). Opens the handshake dialog via the
-                global event (dialog lives in MyServersPanel). */}
-            <button
-                onClick={() => openAeroShareDialog({ mode: 'receive' })}
-                className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-[var(--color-bg-tertiary)] transition-colors cursor-pointer"
-                title={t('aeroShare.addFriend')}
-            >
-                <UserPlus size={14} className="text-violet-500" />
-            </button>
 
             {/* Center: drag region spacer */}
             <div data-tauri-drag-region className="flex-1 h-full" />

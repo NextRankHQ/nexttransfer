@@ -22219,22 +22219,6 @@ const App: React.FC = () => {
             devToolsOpen={devToolsOpen}
             hubVisible={showConnectionScreen}
             aeroFileActive={!showConnectionScreen && (!isConnected || !showRemotePanel)}
-            onToggleAeroFile={handleToggleAeroFile}
-            onToggleDevTools={() => setDevToolsOpen(!devToolsOpen)}
-            aeroAgentOpen={devToolsOpen}
-            onToggleAeroAgent={() => {
-              if (!devToolsOpen) {
-                setDevToolsOpen(true);
-                // Opening AeroAgent shows AeroAgent alone, as View > AeroAgent
-                // does, not next to whatever Editor or Terminal was open last.
-                setTimeout(() => window.dispatchEvent(new CustomEvent('devtools-panel-solo', { detail: 'agent' })), 50);
-              } else {
-                // DevTools already open: toggle agent panel
-                window.dispatchEvent(new CustomEvent('devtools-panel-toggle', { detail: 'agent' }));
-              }
-            }}
-            onToggleSync={() => openAeroSync('compare')}
-            onToggleCloud={() => setShowCloudPanel(true)}
             cloudEnabled={isCloudActive}
             cloudPaused={isCloudPaused}
             cloudSyncing={cloudSyncing}
