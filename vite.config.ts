@@ -2,14 +2,15 @@ import { defineConfig, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { readFileSync, cpSync, existsSync } from 'fs'
 import { resolve } from 'path'
-import { resolveInstalledVersion, loadPackageManifest, loadPackageLock } from './scripts/lib/frontend-versions'
+import { resolveInstalledVersion, loadPackageManifest, loadPackageLock } from './scripts/lib/frontend-versions.ts'
 
 // Extract resolved versions for build-time injection into the About dialog.
 // Prefers the exact lockfile resolution (or the installed package.json in node_modules)
 // so the Technical tab and copied technical info report the real build version rather
 // than the manifest range minimum.
-const lock = loadPackageLock(__dirname);
-const pkg = loadPackageManifest(__dirname) || {};
+const rootDir = import.meta.dirname;
+const lock = loadPackageLock(rootDir);
+const pkg = loadPackageManifest(rootDir) || {};
 
 /**
  * Copy Monaco Editor AMD assets to dist/vs at build time,
@@ -17,7 +18,7 @@ const pkg = loadPackageManifest(__dirname) || {};
  * The AMD loader files are in IIFE format: workers load without ESM issues.
  */
 function copyMonacoAssets(): Plugin {
-  const monacoPath = resolve(__dirname, 'node_modules/monaco-editor/min');
+  const monacoPath = resolve(rootDir, 'node_modules/monaco-editor/min');
   return {
     name: 'copy-monaco-assets',
     configureServer(server) {
@@ -50,7 +51,7 @@ function copyMonacoAssets(): Plugin {
     },
     writeBundle() {
       const src = resolve(monacoPath, 'vs');
-      const dest = resolve(__dirname, 'dist/vs');
+      const dest = resolve(rootDir, 'dist/vs');
       if (existsSync(src)) {
         cpSync(src, dest, { recursive: true });
       }
@@ -62,15 +63,19 @@ function copyMonacoAssets(): Plugin {
 export default defineConfig({
   plugins: [react(), copyMonacoAssets()],
   build: {
-    rollupOptions: {
+    chunkSizeWarningLimit: 25000,
+    rolldownOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       // Multi-page: the main app plus the dedicated lightweight `extract` window
       // (Deliverable G). Each HTML entry gets its own bundle so extract.html does
       // not pull in the full App.
       input: {
-        main: resolve(__dirname, 'index.html'),
-        extract: resolve(__dirname, 'extract.html'),
+        main: resolve(rootDir, 'index.html'),
+        extract: resolve(rootDir, 'extract.html'),
         // AeroAgent approval window: its own bundle, nothing of the chat.
-        'ai-approval': resolve(__dirname, 'ai-approval.html'),
+        'ai-approval': resolve(rootDir, 'ai-approval.html'),
       },
     },
   },
@@ -87,11 +92,11 @@ export default defineConfig({
   },
   define: {
     __FRONTEND_VERSIONS__: JSON.stringify({
-      react: resolveInstalledVersion('react', undefined, __dirname, lock, pkg),
-      typescript: resolveInstalledVersion('typescript', undefined, __dirname, lock, pkg),
-      tailwindcss: resolveInstalledVersion('tailwindcss', undefined, __dirname, lock, pkg),
-      monaco: resolveInstalledVersion('monaco-editor', pkg.dependencies?.['monaco-editor'] ?? pkg.dependencies?.['@monaco-editor/react'], __dirname, lock, pkg),
-      vite: resolveInstalledVersion('vite', undefined, __dirname, lock, pkg),
+      react: resolveInstalledVersion('react', undefined, rootDir, lock, pkg),
+      typescript: resolveInstalledVersion('typescript', undefined, rootDir, lock, pkg),
+      tailwindcss: resolveInstalledVersion('tailwindcss', undefined, rootDir, lock, pkg),
+      monaco: resolveInstalledVersion('monaco-editor', pkg.dependencies?.['monaco-editor'] ?? pkg.dependencies?.['@monaco-editor/react'], rootDir, lock, pkg),
+      vite: resolveInstalledVersion('vite', undefined, rootDir, lock, pkg),
     }),
   },
 })
