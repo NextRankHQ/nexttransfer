@@ -15863,8 +15863,6 @@ const App: React.FC = () => {
       { actionId: 'download', label: downloadLabel, icon: <Download size={14} />, action: () => downloadMultipleFiles(filesToUse) },
       // Media files (images, audio, video, pdf) use Universal Preview modal
       { label: t('common.preview'), icon: <Eye size={14} />, action: () => openUniversalPreview(file, true, sortedRemoteFilesRef.current), disabled: count > 1 || file.is_dir || !isMediaPreviewable(file.name) },
-      // Code files use DevTools source viewer
-      { label: t('contextMenu.viewSource'), icon: <Code size={14} />, action: () => openDevToolsPreview(file, true), disabled: count > 1 || file.is_dir || !isPreviewable(file.name) },
       { actionId: 'rename', label: (currentProtocol === 'github' || currentProtocol === 'gitlab') ? t('github.renameCommit') : t('common.rename'), icon: currentProtocol === 'github' ? <Github size={14} /> : currentProtocol === 'gitlab' ? <GitLabLogo size={14} /> : <Pencil size={14} />, action: () => renameFile(file.path, file.name, true), disabled: count > 1 || currentProtocol === 'immich', shortcut: (currentProtocol === 'github' || currentProtocol === 'gitlab') ? undefined : 'F2' },
       ...(count > 1 && currentProtocol !== 'immich' ? [{
         label: t('batchRename.title') || 'Batch Rename',
@@ -17177,8 +17175,6 @@ const App: React.FC = () => {
       }] : []),
       // Media files (images, audio, video, pdf) use Universal Preview modal
       { label: t('common.preview'), icon: <Eye size={14} />, action: () => openUniversalPreview(file, false, sortedLocalFilesRef.current), disabled: count > 1 || file.is_dir || !isMediaPreviewable(file.name) },
-      // Code files use DevTools source viewer
-      { label: t('contextMenu.viewSource'), icon: <Code size={14} />, action: () => openDevToolsPreview(file, false), disabled: count > 1 || file.is_dir || !isPreviewable(file.name) },
       { actionId: 'rename', label: t('common.rename'), icon: <Pencil size={14} />, action: () => renameFile(file.path, localRowName(file), false), disabled: count > 1, shortcut: 'F2' },
       ...(count > 1 ? [{
         label: t('batchRename.title') || 'Batch Rename',
@@ -17471,46 +17467,6 @@ const App: React.FC = () => {
       });
     }
 
-    // Always show "Create AeroVault..." / archive actions and "More"
-    // (except on container/cryptomator files).
-    if (!isAeroVaultFile && !isAeroVaultArchiveFile && !isCryptomatorMarker) {
-      // ONE unified "Create AeroVault..." entry (redesign Phase 4): the modal
-      // opens on the Encrypted (.aerovault) tab by default; the plaintext
-      // .aerozip choice lives on its format card inside the modal, so the menu
-      // no longer carries a separate Zip / Encrypt-Folder item. Folder vs files
-      // is just the selection: a single folder routes to folder mode, otherwise
-      // the selected files are staged.
-      items.push({
-        label: t('contextMenu.createAeroVault') || 'Create AeroVault...',
-        icon: <VaultIcon size={14} />,
-        action: () => {
-          if (count === 1 && file.is_dir) {
-            setShowVaultPanel({ mode: 'create', folderPath: file.path, outputDir: rowFolder });
-            return;
-          }
-          const paths = selectedLocalTrees(ctxPanel.sortedFiles, localFiles, selection).map(f => f.path);
-          setShowVaultPanel({ mode: 'create', files: paths, outputDir: selectionFolder() });
-        },
-      });
-
-      // "More" sub-menu with Cryptomator create
-      items.push({
-        label: t('contextMenu.more') || 'More',
-        icon: <MoreHorizontal size={14} />,
-        action: () => { },
-        children: [
-          {
-            label: t('contextMenu.createCryptomator') || 'Create Cryptomator Vault...',
-            icon: <Lock size={14} />,
-            action: () => {
-              const paths = selectedLocalTrees(ctxPanel.sortedFiles, localFiles, selection).map(f => f.path);
-              setCryptomatorCreateDialog({ outputDir: selectionFolder(), files: paths });
-            },
-          },
-        ],
-      });
-    }
-
     // Tags submenu: Finder-style color labels
     if (fileTags.labels.length > 0) {
       const selectedPaths = selectedLocalRows(ctxPanel.sortedFiles, localFiles, selection).map(f => f.path);
@@ -17657,29 +17613,6 @@ const App: React.FC = () => {
         label: t('contextMenu.refresh') || 'Refresh', icon: <RefreshCw size={14} />,
         action: () => loadRemoteFiles(),
       },
-      // Encrypted overlay open/create (folder-scoped): replaces the removed
-      // toolbar buttons. Only on backends where a transparent crypt overlay
-      // actually applies (not media-only / repo APIs), and only when no overlay
-      // is already active (the lit path-bar badge handles lock/detach: opening a
-      // second overlay on an active panel would conflict).
-      ...(providerSupportsCryptOverlay(currentProtocol) && !aeroCryptVaultId && !rcloneCryptVaultId ? [
-        {
-          label: `${t('aerocryptNative.title')} (${t('aerocryptNative.recommended')})`,
-          icon: <Lock size={14} className="text-emerald-500" />,
-          action: () => setShowAeroCryptUnlock({ scope: overlayAnchor(currentRemotePath) }),
-        } as ContextMenuItem,
-        {
-          label: t('aerocrypt.title'),
-          icon: <Lock size={14} className="text-blue-500" />,
-          action: () => setShowRcloneCryptUnlock({ scope: overlayAnchor(currentRemotePath) }),
-          divider: true,
-        } as ContextMenuItem,
-      ] : []),
-      ...(currentProtocol === 'filelu' ? [{
-        label: t('filelu.remoteUrlUpload'),
-        icon: <span style={{ fontSize: 13 }}>🌐</span>,
-        action: () => setFileLuRemoteUploadDialog({ destPath: currentRemotePath }),
-      }] : []),
       {
         label: t('contextMenu.selectAll') || 'Select All', icon: <CheckCircle2 size={14} />,
         action: () => { setPanelSelection('remote', [], 'all'); },
@@ -20537,23 +20470,6 @@ const App: React.FC = () => {
                   )}
                   {isConnected && showRemotePanel && (
                     <>
-                      <button
-                        onClick={toggleAeroVaultOverlay}
-                        className={`px-3 py-1.5 rounded-lg text-sm flex items-center justify-center transition-colors ${aeroVaultOverlaySession
-                          ? 'bg-emerald-500 hover:bg-emerald-600 text-white'
-                          : 'bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500'
-                          }`}
-                        title={aeroVaultOverlaySession ? t('toolbar.aerovaultOverlayActive') : t('toolbar.aerovaultOverlayInactive')}
-                        aria-label="AeroVault"
-                        aria-pressed={!!aeroVaultOverlaySession}
-                      >
-                        <VaultIcon variant="outline" size={16} className={aeroVaultOverlaySession ? 'text-white' : ''} />
-                      </button>
-                      {/* AeroCrypt / rclone-crypt overlay controls live in the remote
-                          path-bar badge (status + click-to-lock) and the remote
-                          empty-area context menu (open/create). The two dedicated
-                          toolbar buttons were removed to avoid a duplicated overlay
-                          icon: the lit badge is the single, type-coloured control. */}
                       <button
                         data-testid={TID.toolbarCancelAll}
                         onClick={cancelTransfer}

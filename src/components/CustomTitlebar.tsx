@@ -259,7 +259,6 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
         { label: t('menu.newFolder'), shortcut: 'Ctrl+N', onClick: onNewFolder, disabled: !hasFilePanel },
         { label: t('common.settings'), shortcut: 'Ctrl+,', onClick: onOpenSettings },
         { label: t('settings.exportImport'), onClick: onShowExportImport },
-        { label: t('menu.mountManager'), onClick: onShowMountManager },
         { separator: true },
         // L53: Debug Mode only visible in dev builds: in production, Cyber theme auto-enables it
         ...(import.meta.env.DEV ? [{ label: t('menu.debugMode'), shortcut: 'Ctrl+Shift+F12', onClick: onToggleDebugMode }] : []),
@@ -302,11 +301,7 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
         },
         { label: t('menu.toggleTheme'), shortcut: 'Ctrl+T', onClick: onToggleTheme },
         { separator: true },
-        { label: t('menu.toggleEditor'), shortcut: 'Ctrl+1', onClick: onToggleEditor },
-        { label: t('menu.toggleTerminal'), shortcut: 'Ctrl+2', onClick: onToggleTerminal },
-        { separator: true },
         { label: t('menu.activityLog'), shortcut: 'Ctrl+Shift+L', onClick: onToggleActivityLog },
-        { label: t('menu.debugPanel'), shortcut: 'Ctrl+Shift+M', onClick: onToggleDebugPanel },
     ];
 
     const helpMenu: MenuEntry[] = [
@@ -319,7 +314,6 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
         { separator: true },
         { label: t('menu.providers'), onClick: onShowProviders },
         { separator: true },
-        { label: t('menu.support'), onClick: onShowSupport },
         { label: appVersion ? `${t('menu.about')} ${appVersion}` : t('menu.about'), onClick: onShowAbout },
     ];
 
@@ -412,15 +406,6 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
             {/* Separator after menus */}
             <div className="w-px h-4 bg-[var(--color-border)] mx-1" />
 
-            {/* Support (Heart) */}
-            <button
-                onClick={onShowSupport}
-                className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-[var(--color-bg-tertiary)] transition-colors cursor-pointer"
-                title={t('about.supportDev')}
-            >
-                <Heart size={14} className="text-blue-500 fill-current" />
-            </button>
-
             {/* Theme Toggle */}
             <ThemeToggle theme={theme} setTheme={setTheme} />
 
@@ -486,39 +471,8 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
 
                 <div data-tauri-drag-region className="w-3 self-stretch shrink-0" />
 
-                {/* Cluster 2: Utility (Notifications, Security Tools, AeroVault, Users, Lock, Settings) */}
+                {/* Cluster 2: Utility (Users, Lock, Settings) */}
                 <div className="flex items-center gap-0.5">
-                    {/* AeroShare notification center: durable surface for received/
-                        sent/failed transfers (Finding 8). Flag-gated on activation
-                        (unlike the always-visible +friend icon) - the bell only
-                        lights up once AeroShare is active, since notifications only
-                        originate from AeroShare. */}
-                    {aeroShareEnabled && <NotificationBell />}
-                    {/* Security Tools: Cyber-theme easter egg (Ehud liked it, #369),
-                        the one path that still opens the tools as a floating
-                        window. Every theme reaches them from the AeroTools
-                        toolbar launcher as a panel (#347), so nothing is
-                        undiscoverable here. */}
-                    {appTheme === 'cyber' && (
-                        <button
-                            onClick={onShowCyberTools}
-                            className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-[var(--color-bg-tertiary)] transition-colors cursor-pointer"
-                            title={t('cyberTools.title')}
-                        >
-                            <CyberShieldIcon size={14} className="text-emerald-400" />
-                        </button>
-                    )}
-                    <button
-                        onClick={onShowVault}
-                        className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-[var(--color-bg-tertiary)] transition-colors cursor-pointer"
-                        title={t('vault.titleFull')}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={14} height={14} fill="none" stroke="currentColor" className="text-[var(--color-text-secondary)]">
-                            <path d="M12 21l.88-.38a11 11 0 006.63-9.26l.43-5.52a1 1 0 00-.76-1L12 3 4.82 4.8a1 1 0 00-.76 1l.43 5.52a11 11 0 006.63 9.26z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <rect x="9.25" y="11" width="5.5" height="4" rx="0.75" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M10.25 11V9.5a1.75 1.75 0 013.5 0V11" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </button>
                     <UserDropdown onUsersChanged={onUsersChanged} onLockAccount={onLockAccount} lockBusy={lockBusy} />
                     <button
                         data-testid={masterPasswordSet ? TID.titlebarLock : undefined}

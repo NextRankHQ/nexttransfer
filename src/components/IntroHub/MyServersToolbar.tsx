@@ -156,16 +156,6 @@ export function MyServersToolbar({
                 </button>
             )}
 
-            {onOpenMountManager && (
-                <button
-                    onClick={onOpenMountManager}
-                    className="p-2 rounded-lg bg-sky-50 dark:bg-sky-900/30 hover:bg-sky-100 dark:hover:bg-sky-800/40 text-sky-600 dark:text-sky-400 transition-colors"
-                    title={t('mountManager.title')}
-                >
-                    <HardDrive size={15} />
-                </button>
-            )}
-
             {/* Health Check - emerald like original */}
             {onHealthCheck && serverCount > 0 && (
                 <button
