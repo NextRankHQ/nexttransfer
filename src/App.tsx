@@ -3036,12 +3036,6 @@ const App: React.FC = () => {
       }
     },
 
-    // F4: open AeroSync (unified compare/plan/sync modal). Mirrors the View
-    // menu shortcut so muscle memory keeps working regardless of focus.
-    'F4': () => {
-      openAeroSync('compare');
-    },
-
     // F7 / Ctrl+N: new folder (Total Commander style F7, classic Ctrl+N).
     // Both target whichever panel currently has keyboard focus.
     'F7': () => {
@@ -5885,13 +5879,6 @@ const App: React.FC = () => {
     { id: 'file-newfolder', label: t('contextMenu.newFolder'), category: 'file' as CommandCategory, icon: <FolderPlus size={14} />, action: () => createFolder(activePanel === 'remote'), keywords: ['create', 'directory', 'mkdir'] },
     { id: 'file-refresh', label: t('contextMenu.refresh'), category: 'file' as CommandCategory, icon: <RefreshCw size={14} />, action: () => { if (activePanel === 'remote') loadRemoteFiles(); else loadLocalFiles(currentLocalPath); }, keywords: ['reload'] },
     ...(canSendSiteCommand ? [{ id: 'connection-site-command', label: t('menu.siteCommand'), category: 'navigation' as CommandCategory, icon: <Terminal size={14} />, action: () => setShowSiteCommand(true), keywords: ['site', 'ftp', 'raw', 'quote', 'command', 'glftpd'] }] : []),
-    // AI
-    { id: 'ai-agent', label: 'AeroAgent', category: 'ai' as CommandCategory, icon: <Bot size={14} />, action: () => window.dispatchEvent(new CustomEvent('devtools-panel-ensure', { detail: 'agent' })), keywords: ['chat', 'assistant', 'ai'] },
-    // Tools
-    { id: 'tools-editor', label: t('devtools.codeEditor'), category: 'tools' as CommandCategory, icon: <Code size={14} />, action: () => window.dispatchEvent(new CustomEvent('devtools-panel-ensure', { detail: 'editor' })), keywords: ['code', 'monaco', 'edit'] },
-    { id: 'tools-terminal', label: t('devtools.sshTerminal'), category: 'tools' as CommandCategory, icon: <Terminal size={14} />, action: () => window.dispatchEvent(new CustomEvent('devtools-panel-ensure', { detail: 'terminal' })), keywords: ['ssh', 'shell', 'console'] },
-    // Sync
-    { id: 'aerosync', label: t('aerosync.title') || 'AeroSync', category: 'sync' as CommandCategory, icon: <FolderSync size={14} />, action: () => openAeroSync('sync'), keywords: ['synchronize', 'aerosync', 'aerofile', 'compare', 'plan', 'delta', 'aerorsync'] },
     // AeroVault overlay
     {
       id: 'tools-aerovault-overlay',
@@ -18791,7 +18778,7 @@ const App: React.FC = () => {
         )}
         {aeroSync && (
           <AeroSyncDialog
-            isOpen
+            isOpen={false}
             initialTab={aeroSync.initialTab}
             context={aeroSync.context}
             onClose={() => setAeroSync(null)}
@@ -20592,28 +20579,6 @@ const App: React.FC = () => {
                       ) : null;
                     })()}
                   </button>
-                  {/* Unified AeroSync entry: lit when two panels are actionable
-                      (local+remote OR dual-local). Opens the AeroSyncDialog
-                      with pairKind auto-detected. Replaces the legacy per-panel
-                      sync icon and the connected-only toolbar button. */}
-                  {(() => {
-                    const isAeroSyncActionable = (isConnected && showRemotePanel) || showDualLocalPanel;
-                    return (
-                      <button
-                        onClick={() => openAeroSync()}
-                        className={`px-3 py-1.5 rounded-lg text-sm flex items-center gap-1.5 transition-colors ${
-                          isAeroSyncActionable
-                            ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm'
-                            : 'bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-700 dark:text-gray-200'
-                        }`}
-                        data-testid="aerosync.open"
-                        title={t('aerosync.toolbarButton') || t('statusBar.syncFiles')}
-                        aria-label={t('aerosync.toolbarButton') || t('statusBar.syncFiles')}
-                      >
-                        <FolderSync size={16} /> AeroSync
-                      </button>
-                    );
-                  })()}
                   {/* Separator */}
                   {isConnected && (
                     <div className="w-px h-7 bg-gray-300 dark:bg-gray-600 mx-1" />

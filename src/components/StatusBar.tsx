@@ -469,42 +469,6 @@ export const StatusBar: React.FC<StatusBarProps> = ({
                     only once AeroShare is activated). Sits next to AeroCloud. */}
                 <AeroShareStatusButton />
 
-                {/* Sync Button */}
-                {onToggleSync && isConnected && (
-                    <button
-                        onClick={onToggleSync}
-                        className="flex items-center gap-1.5 px-2 py-0.5 rounded transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
-                        title={t('statusBar.syncFiles')}
-                    >
-                        <FolderSync size={12} />
-                        <span>{t('syncPanel.title')}</span>
-                    </button>
-                )}
-
-                {/* AeroAgent Button with AI Status */}
-                {onToggleAeroAgent && (
-                    <button
-                        onClick={onToggleAeroAgent}
-                        className={`flex items-center gap-1.5 px-2 py-0.5 rounded transition-colors ${aeroAgentOpen
-                            ? 'bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400'
-                            : 'hover:bg-gray-200 dark:hover:bg-gray-700'
-                            }`}
-                        title={t('statusBar.aeroagentTitle')}
-                    >
-                        <Bot size={12} className={aiStatus === 'streaming' ? 'animate-pulse' : ''} />
-                        <span>{t('statusBar.aeroagent')}</span>
-                        {aiStatus === 'streaming' && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping" />
-                        )}
-                        {aiStatus === 'tool-execution' && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-                        )}
-                        {aiStatus === 'error' && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                        )}
-                    </button>
-                )}
-
                 {/* Debug Mode Badge */}
                 {debugMode && onToggleDebug && (
                     <button
