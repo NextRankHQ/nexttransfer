@@ -481,36 +481,6 @@ export const StatusBar: React.FC<StatusBarProps> = ({
                     </button>
                 )}
 
-                {/* DevTools Toggle */}
-                {onToggleDevTools && (
-                    <button
-                        onClick={onToggleDevTools}
-                        className={`flex items-center gap-1.5 px-2 py-0.5 rounded transition-colors ${devToolsOpen
-                            ? 'bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400'
-                            : 'hover:bg-gray-200 dark:hover:bg-gray-700'
-                            }`}
-                        title={t('statusBar.devTools')}
-                    >
-                        <Code size={12} />
-                        <span>{t('statusBar.devTools')}</span>
-                    </button>
-                )}
-
-                {/* Language chip, LAST in the cluster and behind its own
-                    divider. It was between the AeroAgent button and DevTools,
-                    which split the Aero family in half and made a readout look
-                    like one more app button. It is neither: it says which
-                    language the app is in, and clicking it goes to the list.
-                    The far right edge is where a status readout belongs, and
-                    the divider says "this is not part of that group".
-
-                    AeroFTP ships 47 interface languages and starts in English
-                    by design (detectBrowserLanguage is deliberately disabled in
-                    I18nContext), so a user whose language IS in the list has no
-                    way of learning that from the running app: the selector
-                    lives four clicks deep, in Settings > Appearance > Interface.
-                    This is the signpost. Code only, no flag: a flag names a
-                    country, and a language is not one. */}
                 {onOpenLanguageSettings && (
                     <>
                         <div className="w-px h-4 bg-gray-300 dark:bg-gray-600" />

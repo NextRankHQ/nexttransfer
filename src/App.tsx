@@ -16663,29 +16663,6 @@ const App: React.FC = () => {
     // l'overlay e' una proprieta' del pannello remoto, non del singolo entry.
     // L'aggancio primario vive ora nel pulsante toolbar Rclone Crypt.
 
-    // Ask AeroAgent
-    items.push({
-      label: t('contextMenu.askAeroAgent'),
-      icon: <Bot size={14} />,
-      action: () => {
-        if (!devToolsOpen) {
-          setDevToolsOpen(true);
-          setTimeout(() => {
-            window.dispatchEvent(new CustomEvent('devtools-panel-ensure', { detail: 'agent' }));
-            window.dispatchEvent(new CustomEvent('aeroagent-ask', {
-              detail: { code: '', fileName: file.name, filePath: file.path, context: 'file' }
-            }));
-          }, 50);
-        } else {
-          window.dispatchEvent(new CustomEvent('devtools-panel-ensure', { detail: 'agent' }));
-          window.dispatchEvent(new CustomEvent('aeroagent-ask', {
-            detail: { code: '', fileName: file.name, filePath: file.path, context: 'file' }
-          }));
-        }
-      },
-      divider: true,
-    });
-
     contextMenu.show(e, items);
   };
 
@@ -17583,31 +17560,6 @@ const App: React.FC = () => {
         divider: true,
       });
     }
-
-    // Ask AeroAgent
-    items.push({
-      label: t('contextMenu.askAeroAgent'),
-      icon: <Bot size={14} />,
-      action: () => {
-        const fullPath = file.path || (currentLocalPath.endsWith('/') ? currentLocalPath + file.name : currentLocalPath + '/' + file.name);
-        const fileName = localRowName(file);
-        if (!devToolsOpen) {
-          setDevToolsOpen(true);
-          setTimeout(() => {
-            window.dispatchEvent(new CustomEvent('devtools-panel-ensure', { detail: 'agent' }));
-            window.dispatchEvent(new CustomEvent('aeroagent-ask', {
-              detail: { code: '', fileName, filePath: fullPath, context: 'file' }
-            }));
-          }, 50);
-        } else {
-          window.dispatchEvent(new CustomEvent('devtools-panel-ensure', { detail: 'agent' }));
-          window.dispatchEvent(new CustomEvent('aeroagent-ask', {
-            detail: { code: '', fileName, filePath: fullPath, context: 'file' }
-          }));
-        }
-      },
-      divider: true,
-    });
 
     contextMenu.show(e, items);
   };
