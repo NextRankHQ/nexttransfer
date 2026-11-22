@@ -99,7 +99,7 @@
 <RegistryValue Root="HKLM" Key="Software\Classes\AeroFTP.aeroftp-script\shell\open"  Type="string" Value="Open with AeroFTP" />
 <RegistryValue Root="HKLM" Key="Software\Classes\AeroFTP.aeroftp-script\shell\open\command"  Type="string" Value="&quot;[INSTALLDIR]aeroftp.exe&quot; &quot;%1&quot;" />
 </Component></DirectoryRef>
-<Feature Id="AeroFTPOwnedAssociations" Title="AeroFTP file formats" Level="1" AllowAdvertise="no" Absent="allow"><ComponentRef Id="AeroFTPOwnedAssociationsRegistry" /><ComponentRef Id="AeroFTPApplicationRegistration" /><Condition Level="2">AEROFTP_NOASSOC = "1"</Condition></Feature>
+<Feature Id="AeroFTPOwnedAssociations" Title="NextTransfer file formats" Level="1" AllowAdvertise="no" Absent="allow"><ComponentRef Id="AeroFTPOwnedAssociationsRegistry" /><ComponentRef Id="AeroFTPApplicationRegistration" /><Condition Level="2">AEROFTP_NOASSOC = "1"</Condition></Feature>
 <DirectoryRef Id="INSTALLDIR"><Component Id="AeroFTPArchiveAssociationsRegistry" Guid="1974D4FC-4A3E-4AAC-8816-3D56CAD68B42" Win64="$(var.Win64)">
 <RegistryValue Root="HKLM" Key="Software\AeroFTP\Settings" Name="ArchiveFormats" Type="integer" Value="1" KeyPath="yes" />
 <RegistryValue Root="HKLM" Key="Software\Classes\SystemFileAssociations\.zip\shell\AeroFTPExtractHere"  Type="string" Value="Extract Here with AeroFTP" />

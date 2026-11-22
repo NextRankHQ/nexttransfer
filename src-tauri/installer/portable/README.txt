@@ -1,5 +1,5 @@
-AeroFTP Portable - Windows
-==========================
+NextTransfer Portable - Windows
+===============================
 
 QUICK START
 -----------
@@ -7,26 +7,11 @@ QUICK START
 1. Extract this ZIP to any folder you can write to (Desktop, USB drive, network
    share, anywhere). NO admin rights required.
 
-2. Double-click AeroFTP.exe to launch.
+2. Double-click NextTransfer.exe to launch.
 
-3. All your data (saved servers, AeroAgent chats, AeroVault, cache, logs)
-   stays inside the AeroFTP folder under "data\". You can move the whole
-   folder to another machine and pick up where you left off.
-
-
-COMMAND-LINE TOOLS
-------------------
-
-This folder also ships the headless command-line tools, next to AeroFTP.exe:
-
-  - aeroftp-cli.exe       Scriptable client for every provider (FTP/SFTP/cloud),
-                          transfers, and AeroVault. Run "aeroftp-cli.exe --help".
-  - aeroftp-dispatch.exe  Subcommand dispatcher used by the CLI; you normally
-                          do not call it directly.
-
-They share the same portable "data\" folder as the app, so servers and the
-vault you set up in the GUI are visible to the CLI and vice versa. To use them
-from any prompt, add this folder to your PATH (optional).
+3. All your data (saved servers, credentials, cache, logs) stays inside the
+   NextTransfer folder under "data\". You can move the whole folder to another
+   machine and pick up where you left off.
 
 
 REQUIREMENTS
@@ -35,7 +20,6 @@ REQUIREMENTS
   - Windows 10 1809+ or Windows 11
   - Microsoft Visual C++ Redistributable for Visual Studio 2015-2022 (x64)
       Download:  https://aka.ms/vs/17/release/vc_redist.x64.exe
-      AeroFTP will prompt you on first launch if this is missing.
   - WebView2 Runtime (preinstalled on Windows 11 and on Windows 10 since
     2021 via Windows Update; install manually if missing)
       Download:  https://developer.microsoft.com/microsoft-edge/webview2/
@@ -46,49 +30,25 @@ AUTO-UPDATES
 
 The portable build checks GitHub Releases for updates and replaces the
 .exe in place. No installer wizard, no admin prompt. After download +
-Sigstore verification AeroFTP swaps the executable, restarts itself, and
+Sigstore verification NextTransfer swaps the executable, restarts itself, and
 cleans up the old version automatically.
 
-The check happens at launch and every 24 hours while the app is running.
-You can also trigger it manually from Help -> Check for Updates.
-
-aeroftp-app.exe is the app again, the same as AeroFTP.exe. It is in the ZIP
-so that versions 4.0.8 to 4.2.4, whose updater took the first .exe of the
-ZIP, install the app and not the CLI. You can delete it; if you keep it,
-updates keep it current.
+You can also trigger an update check manually from Help -> Check for Updates.
 
 
 UNINSTALL
 ---------
 
 Delete this folder. There is no registry footprint, no service, no leftover
-file outside the folder. Your data dies with the folder unless you copy
-"data\" out first.
-
-Versions up to 4.2.4 wrote their log, AeroFTP.log, outside this folder, in
-%LOCALAPPDATA%\com.aeroftp.AeroFTP\logs. Newer versions log to "data\logs\"
-and leave that file where it is. An installed AeroFTP writes its own log to
-the same file: delete it only if AeroFTP is not also installed on this
-machine.
-
-
-SECURITY NOTES
---------------
-
-  - This binary is signed with Sigstore (cosign keyless, GitHub Actions OIDC).
-    The auto-updater verifies the signature against the GitHub Actions OIDC
-    identity before installing any update.
-  - Authenticode signing is on the roadmap but not yet active. Windows
-    SmartScreen may show "Unknown publisher" on first launch; this is
-    expected until the Authenticode certificate work lands.
+file outside the folder.
 
 
 SUPPORT
 -------
 
-  - Documentation:  https://aeroftp.app
-  - Issues:         https://github.com/axpdev-lab/aeroftp/issues
-  - Changelog:      https://github.com/axpdev-lab/aeroftp/blob/main/CHANGELOG.md
+  - Website & Docs: https://nextrankhq.com/next-transfer
+  - Issues:         https://github.com/NextRankHQ/nexttransfer/issues
+  - Changelog:      https://github.com/NextRankHQ/nexttransfer/blob/main/CHANGELOG.md
 
 
 LICENSE

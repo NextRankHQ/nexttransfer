@@ -381,14 +381,12 @@ FunctionEnd
 ; 5. Choose install directory page
 !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
 !insertmacro MUI_PAGE_DIRECTORY
-; AeroFTP issue #454: visible, independent association choices.
-Page custom AeroFTPAssociationPage AeroFTPAssociationPageLeave
 Function AeroFTPAssociationPage
   ${If} $PassiveMode = 1
   ${OrIf} $UpdateMode = 1
     Abort
   ${EndIf}
-  !insertmacro MUI_HEADER_TEXT "File associations" "Choose where AeroFTP appears in Windows."
+  !insertmacro MUI_HEADER_TEXT "File associations" "Choose where NextTransfer appears in Windows."
   nsDialogs::Create 1018
   Pop $0
   ${If} $0 == error
@@ -396,7 +394,7 @@ Function AeroFTPAssociationPage
   ${EndIf}
   ${NSD_CreateLabel} 0 0 100% 32u "These choices are kept during updates. Windows manages your default apps separately."
   Pop $0
-  ${NSD_CreateCheckbox} 0 42u 100% 16u "Register AeroFTP file formats"
+  ${NSD_CreateCheckbox} 0 42u 100% 16u "Register NextTransfer file formats"
   Pop $AeroFTPOwnedCheckbox
   ${NSD_SetState} $AeroFTPOwnedCheckbox $AeroFTPOwnedFormats
   ${NSD_CreateCheckbox} 0 68u 100% 16u "Register archive formats and Explorer menus"

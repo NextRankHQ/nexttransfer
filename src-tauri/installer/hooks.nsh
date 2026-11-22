@@ -60,25 +60,19 @@ Var AeroFTPHadDesktopShortcut
 !macro NSIS_HOOK_PREINSTALL
     StrCpy $AeroFTPWasInstalled "no"
     StrCpy $AeroFTPHadDesktopShortcut "no"
-    IfFileExists "$INSTDIR\AeroFTP.exe" 0 _aeroftp_pre_check_shortcut
+    IfFileExists "$INSTDIR\${MAINBINARYNAME}.exe" 0 _aeroftp_pre_check_shortcut
         StrCpy $AeroFTPWasInstalled "yes"
     _aeroftp_pre_check_shortcut:
-    IfFileExists "$DESKTOP\AeroFTP.lnk" 0 _aeroftp_pre_install_done
+    IfFileExists "$DESKTOP\${PRODUCTNAME}.lnk" 0 _aeroftp_pre_install_done
         StrCpy $AeroFTPHadDesktopShortcut "yes"
     _aeroftp_pre_install_done:
 !macroend
 
 !macro NSIS_HOOK_POSTINSTALL
     ; --- Don't recreate desktop shortcut on upgrades (issue #123) ---
-    ; When this run is an upgrade AND the user had no desktop shortcut
-    ; before it started, delete the one the Tauri NSIS template just
-    ; recreated. First-time installs (where AeroFTPWasInstalled stays
-    ; "no") keep the shortcut Tauri creates. Users who like having the
-    ; shortcut will still see it after upgrades because it was already
-    ; present (AeroFTPHadDesktopShortcut == "yes") and we don't touch it.
     StrCmp $AeroFTPWasInstalled "yes" 0 _aeroftp_shortcut_done
         StrCmp $AeroFTPHadDesktopShortcut "no" 0 _aeroftp_shortcut_done
-            Delete "$DESKTOP\AeroFTP.lnk"
+            Delete "$DESKTOP\${PRODUCTNAME}.lnk"
     _aeroftp_shortcut_done:
 
     ; --- Register install dir in user PATH (HKCU) ---
@@ -298,33 +292,14 @@ Var AeroFTPHadDesktopShortcut
     ; a reason to start. The user who ticked the box still gets asked once
     ; about the one thing that cannot be rebuilt.
     _aeroftp_post_full_wipe:
-    DetailPrint "AeroFTP: Remove application data confirmed; wiping caches and agent data."
+    DetailPrint "NextTransfer: Remove application data confirmed; wiping caches."
     RMDir /r "$LOCALAPPDATA\${AEROFTP_APPID_CURRENT}"
     RMDir /r "$LOCALAPPDATA\${AEROFTP_APPID_LEGACY}"
-    ; Tauri's own section removes both roots for the CURRENT id, `$APPDATA` and
-    ; `$LOCALAPPDATA`, and nothing for the legacy one. Read in the generated
-    ; `installer.nsi` by W2 on 2026-09-18, which corrects what this comment used
-    ; to say: it claimed the section touched `$APPDATA` alone, and the two
-    ; current-id lines here were described as one no-op and one real deletion
-    ; when in fact both are no-ops.
-    ;
-    ; What that does NOT change is why the legacy lines exist: on an upgraded
-    ; machine the legacy `$APPDATA` directory holds the AI chat history and the
-    ; agent memory, and it used to survive a ticked "Remove application data"
-    ; with no one naming it. The current-id lines stay because a no-op costs
-    ; nothing and a future template that stops removing one of them would
-    ; otherwise reopen the same hole in silence. The granular branch covers the
-    ; same pair through its own prompt.
-    ;
-    ; Owner decision, 2026-09-17: this goes silently here, like the caches.
-    ; The tick is the consent, and only the vault, which is the thing that
-    ; cannot be rebuilt from anywhere, is worth a second question.
     RMDir /r "$APPDATA\${AEROFTP_APPID_CURRENT}"
     RMDir /r "$APPDATA\${AEROFTP_APPID_LEGACY}"
     MessageBox MB_YESNO|MB_ICONQUESTION \
-        "Remove saved servers, credentials, and vaults?$\n$\n\
-This deletes all connection profiles, stored passwords,$\n\
-and AeroVault containers.$\n$\n\
+        "Remove saved servers and credentials?$\n$\n\
+This deletes all connection profiles and stored passwords.$\n$\n\
 Select 'No' to keep them for a future reinstall." \
         IDYES _rm_servers_full IDNO _aeroftp_post_data_cleanup_done
     _rm_servers_full:
@@ -334,55 +309,17 @@ Select 'No' to keep them for a future reinstall." \
     ; Branch B: granular per-area prompts
     _aeroftp_post_granular:
 
-    ; 1) Saved servers, credentials, and vaults (legacy $APPDATA\aeroftp)
+    ; 1) Saved servers and credentials
     MessageBox MB_YESNO|MB_ICONQUESTION \
-        "Remove saved servers, credentials, and vaults?$\n$\n\
-This deletes all connection profiles, stored passwords,$\n\
-and AeroVault containers.$\n$\n\
+        "Remove saved servers and credentials?$\n$\n\
+This deletes all connection profiles and stored passwords.$\n$\n\
 Select 'No' to keep them for a future reinstall." \
         IDYES _rm_servers IDNO _skip_servers
     _rm_servers:
         RMDir /r "$APPDATA\aeroftp"
     _skip_servers:
 
-    ; 2) AI chat history and agent memory
-    ; (Skipped when Tauri already removed the current-id $APPDATA directory via
-    ; its own section: the directory is gone and the RMDir below is a
-    ; no-op, but we suppress the prompt to avoid confusing the user.)
-    ;
-    ; G82: each directory is probed twice, `\*.*` first and then the bare path.
-    ; The wildcard form is the one this file has always used and the one NSIS
-    ; documents for directories, but it asks "does this directory hold
-    ; anything", so an existing but empty shell answers no and the prompt would
-    ; be skipped for a directory that is still there.
-    ;
-    ; W0 measured the wildcard form on Windows 10 on 2026-09-17 and it DOES
-    ; report an empty directory as present: `FindFirstFile`, which
-    ; `IfFileExists` uses for a wildcard path, finds the `.` entry NTFS keeps in
-    ; every directory. Probed through P/Invoke with a negative control, so the
-    ; probe is known to be able to say no: empty dir FOUND, dir with a file
-    ; FOUND, missing dir NOT FOUND with GetLastError 3. One step stays inferred
-    ; rather than executed, because neither machine had an NSIS toolchain: the
-    ; measurement covers the Win32 primitive and not `IfFileExists` itself. The
-    ; second probe therefore stays as deliberate redundancy for that one step,
-    ; and not as a hedge against something unknown.
-    IfFileExists "$APPDATA\${AEROFTP_APPID_CURRENT}\*.*" _aeroftp_ai_prompt 0
-    IfFileExists "$APPDATA\${AEROFTP_APPID_CURRENT}" _aeroftp_ai_prompt 0
-    IfFileExists "$APPDATA\${AEROFTP_APPID_LEGACY}\*.*" _aeroftp_ai_prompt 0
-    IfFileExists "$APPDATA\${AEROFTP_APPID_LEGACY}" 0 _skip_ai_prompt
-    _aeroftp_ai_prompt:
-    MessageBox MB_YESNO|MB_ICONQUESTION \
-        "Remove AI chat history and agent memory?$\n$\n\
-This deletes AeroAgent conversations, tool history,$\n\
-and learned context." \
-        IDYES _rm_ai IDNO _skip_ai
-    _rm_ai:
-        RMDir /r "$APPDATA\${AEROFTP_APPID_CURRENT}"
-        RMDir /r "$APPDATA\${AEROFTP_APPID_LEGACY}"
-    _skip_ai:
-    _skip_ai_prompt:
-
-    ; 3) Cache and temporary files
+    ; 2) Cache and temporary files
     MessageBox MB_YESNO|MB_ICONQUESTION \
         "Remove cache and temporary files?$\n$\n\
 This deletes WebView cache, logs, and temp data.$\n\
