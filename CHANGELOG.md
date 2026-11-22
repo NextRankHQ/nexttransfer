@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-11-22
+
+### Windows Installer Branding & Streamlined Release Pipeline
+
+- **Windows Installer Artwork & Wizard**: Rebranded all NSIS (`.exe`) and WiX (`.msi`) installer bitmaps (`sidebar.bmp`, `header.bmp`, `banner.bmp`, `dialog.bmp`), wizard labels, and portable documentation to **NextTransfer**, and removed legacy file-association and Aero* prompts.
+- **Splash Screen**: Removed legacy module strings from the startup splash screen.
+
 ## [1.0.0] - 2026-11-22
 
 ### NextTransfer 1.0.0 — Initial Simple Edition Release

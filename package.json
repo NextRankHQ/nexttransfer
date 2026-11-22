@@ -1,7 +1,7 @@
 {
   "name": "nexttransfer",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NextTransfer - Fast, Modern, Reliable Desktop File Transfer Client by NextRankHQ",
   "type": "module",
   "scripts": {

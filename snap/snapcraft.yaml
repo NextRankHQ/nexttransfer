@@ -1,6 +1,6 @@
 name: aeroftp
 title: NextTransfer
-version: '1.0.0'
+version: '1.0.1'
 summary: Fast, Modern, Reliable Desktop File Transfer Client by NextRankHQ
 description: |
   AeroFTP is a modern file transfer client that goes beyond traditional FTP.

@@ -145,6 +145,11 @@
   </languages>
 
   <releases>
+    <release version="1.0.1" date="2026-11-22">
+      <description>
+        <p>NextTransfer 1.0.1 — Rebranded Windows NSIS and WiX installer artwork, wizard steps, and splash screen.</p>
+      </description>
+    </release>
     <release version="1.0.0" date="2026-11-16">
       <description>
         <p>Initial release of NextTransfer 1.0.0 by NextRankHQ — modern, cross-platform desktop file transfer client supporting FTP, FTPS, SFTP, and Amazon S3.</p>
