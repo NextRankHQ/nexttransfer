@@ -832,7 +832,7 @@
             "securityTLS": "Բոլոր կապերը օգտագործում են գաղտնագրում, երբ հասանելի է",
             "startupOptions": "Մեկնարկ",
             "launchOnStartup": "Գործարկել համակարգի մեկնարկին",
-            "launchOnStartupDesc": "",
+            "launchOnStartupDesc": "Ավտոմատ գործարկել NextTransfer-ն համակարգչի միացման ժամանակ:",
             "checkForUpdates": "Ստուգել թարմացումները",
             "checking": "Ստուգում...",
             "updateAvailable": "Թարմացումը հասանելի է:",

@@ -495,6 +495,12 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
                     >
                         <Settings size={14} className="text-[var(--color-text-secondary)]" />
                     </button>
+                    {appTheme === 'cyber' && (
+                        <button
+                            onClick={onShowCyberTools}
+                            className="hidden"
+                        />
+                    )}
                 </div>
 
                 {/* Cluster 3: Window Controls.

@@ -22779,7 +22779,8 @@ pub fn run() {
             };
 
             // Create menu items
-            let quit = MenuItem::with_id(app, "quit", "Quit NextTransfer", true, accel("CmdOrCtrl+Q"))?;
+            let quit =
+                MenuItem::with_id(app, "quit", "Quit NextTransfer", true, accel("CmdOrCtrl+Q"))?;
             let about = MenuItem::with_id(app, "about", "About NextTransfer", true, None::<&str>)?;
             let settings =
                 MenuItem::with_id(app, "settings", "Settings...", true, accel("CmdOrCtrl+,"))?;

@@ -248,11 +248,11 @@ const JSX_NEUTRAL: Record<string, string[]> = {
     ],
     // The Model Context Protocol tab.
     'src/components/AISettings/AISettingsPanel.tsx': ['MCP'],
-    // Protocol and provider lists, the license, a team member, the toolchain and a support site.
+    // Protocol and provider lists, the license, the toolchain and a support site.
     'src/components/AboutDialog.tsx': [
-        'FTP / FTPS / SFTP / WebDAV / S3 / GitHub', 'Google Drive / Dropbox / OneDrive / MEGA / Box / Filen',
-        'GNU General Public License v3.0', 'E.K., PhD', 'Tauri', 'Rust', 'SourceForge', 'React', 'TypeScript',
-        'Tailwind CSS', 'Monaco Editor', 'Vite', 'A.P.', 'SSH/SFTP', 'FTP/FTPS', 'HTTP', 'AES-256-GCM', 'KDF',
+        'FTP / FTPS / SFTP / SCP / S3',
+        'GNU General Public License v3.0', 'Tauri', 'Rust', 'React', 'TypeScript',
+        'Tailwind CSS', 'Monaco Editor', 'Vite', 'SSH/SFTP', 'FTP/FTPS', 'HTTP', 'AES-256-GCM', 'KDF',
         '7z AES-256', 'WebDAV', 'OAuth2',
     ],
     // The word the code compares the input with, named by the translated label.

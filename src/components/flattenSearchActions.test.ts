@@ -179,10 +179,10 @@ describe('local actions on the rows of a flattened search', () => {
     it('takes a selected folder with what is below it, and renames the deepest first', () => {
         // Every action on the whole selection: delete and its confirmation,
         // F5/F6 in the plan and in the transfer, upload, Properties (row menu
-        // and Alt+Enter), compress, AeroVault and Cryptomator creation and the
-        // folder they go in. The clipboard takes them through
-        // localClipboardEntries, the drag through outermostLocalRows.
-        expect(count(appRaw, /selectedLocalTrees\(/g)).toBe(11);
+        // and Alt+Enter), compress and the folder they go in. The clipboard
+        // takes them through localClipboardEntries, the drag through
+        // outermostLocalRows.
+        expect(count(appRaw, /selectedLocalTrees\(/g)).toBe(9);
         expect(body('transferLocalSelectionAcrossPanels')).toMatch(/const rows = selectedLocalTrees\(/);
         expect(body('transferLocalSelectionAcrossPanels')).not.toMatch(/mode === 'move' \?/);
         expect(body('planLocalSelectionAcrossPanels')).toMatch(/const selectedFiles = selectedLocalTrees\(/);
@@ -190,7 +190,6 @@ describe('local actions on the rows of a flattened search', () => {
         const menu = body('showLocalContextMenu');
         expect(menu).toMatch(/const selectedEntries = \(\) => selectedLocalTrees\(/);
         expect(menu).toMatch(/const compressRows = selectedLocalTrees\(/);
-        expect(count(menu, /const paths = selectedLocalTrees\(/g)).toBe(2);
         expect(menu).toMatch(/const folders = new Set\(selectedLocalTrees\(/);
         // Each row on its own: Enter, F2 (key and menu bar), Batch Rename, Tags.
         expect(count(appRaw, /selectedLocalRows\(/g)).toBe(5);
@@ -200,8 +199,7 @@ describe('local actions on the rows of a flattened search', () => {
 
     it('creates an archive or a vault in the folder of what it holds', () => {
         const menu = body('showLocalContextMenu');
-        expect(count(menu, /outputDir: selectionFolder\(\)/g)).toBe(3);
-        expect(menu).toMatch(/folderPath: file\.path, outputDir: rowFolder \}/);
+        expect(count(menu, /outputDir: selectionFolder\(\)/g)).toBe(1);
         expect(menu).not.toMatch(/outputDir: currentLocalPath/);
     });
 

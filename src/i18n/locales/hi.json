@@ -832,7 +832,7 @@
             "securityTLS": "सभी कनेक्शन उपलब्ध होने पर एन्क्रिप्शन का उपयोग करते हैं",
             "startupOptions": "स्टार्टअप",
             "launchOnStartup": "सिस्टम स्टार्टअप पर लॉन्च करें",
-            "launchOnStartupDesc": "",
+            "launchOnStartupDesc": "जब आपका कंप्यूटर बूट होता है तो NextTransfer को स्वचालित रूप से प्रारंभ करें।",
             "checkForUpdates": "अपडेट के लिए जाँच करें",
             "checking": "जाँच हो रही है...",
             "updateAvailable": "अपडेट उपलब्ध है!",

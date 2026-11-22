@@ -6,7 +6,7 @@
         "enHash is the SHA-256 of the flattened current en.json. Change English and run --write in the same commit.",
         "A value listed here fails the gate when a locale still equals it and the current English does not."
     ],
-    "enHash": "c5369b7e774e5ea9796b9b348770c3b20657cca4c6e702487c54349528c59232",
+    "enHash": "23e457f34369302b3ca3f295e7c2fe5c83e1b7a0121ffce94f289b35039b9277",
     "former": {
         "about.aiCredits": [
             "AI: Claude Opus 4.5 + support models"
@@ -837,7 +837,8 @@
             "Credentials are recovered and re-encrypted into the AeroFTP vault."
         ],
         "settings.closeToTrayDesc": [
-            "When you click the window close button, hide AeroFTP to the system tray instead of quitting. Background tasks like AeroCloud sync keep running. Use the tray menu to quit."
+            "When you click the window close button, hide AeroFTP to the system tray instead of quitting. Background tasks like AeroCloud sync keep running. Use the tray menu to quit.",
+            "When you click the window close button, hide NextTransfer to the system tray instead of quitting. Background tasks like AeroCloud sync keep running. Use the tray menu to quit."
         ],
         "settings.cloudProviderDesc": [
             "Configure cloud storage providers. AeroCloud uses your FTP server, OAuth2 providers need API credentials."
@@ -897,7 +898,8 @@
             "Restart AeroFTP to apply restored databases and plugins."
         ],
         "settings.launchOnStartupDesc": [
-            "Automatically start AeroFTP when your computer boots. Recommended if you use AeroCloud Sync."
+            "Automatically start AeroFTP when your computer boots. Recommended if you use AeroCloud Sync.",
+            "Automatically start NextTransfer when your computer boots. Recommended if you use AeroCloud Sync."
         ],
         "settings.masterPasswordDesc": [
             "Protect AeroFTP with a master password. The app will lock after inactivity and require your password to unlock."
