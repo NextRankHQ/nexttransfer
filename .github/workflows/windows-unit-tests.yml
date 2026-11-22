@@ -7,6 +7,8 @@ name: Windows Unit Tests
 # rsync/SFTP paths it was first scoped to (see the job comment below).
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -20,6 +22,7 @@ concurrency:
 
 jobs:
   windows-native:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     # PR-T11: validate the cross-OS surgical gate on Windows.
     # Since v3.6.1 `aerorsync` is in the default feature set,
     # so the "default features" matrix entry is the same as

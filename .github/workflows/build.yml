@@ -2,6 +2,7 @@ name: Build NextTransfer
 
 on:
   push:
+    branches: [main]
     tags:
       - 'v*'
   pull_request:
@@ -21,17 +22,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # C2: Linux lint+test used to sit on the packaging critical path
-  # (clippy ~8m + cargo test ~42m + bundle ~61m serial). This job runs
-  # them on their own ubuntu-22.04 runner so the 4-leg matrix can bundle
-  # in parallel. Coverage unchanged; wall clock ~max(50, 61).
-  # The full test-profile build is distinct from clippy's metadata cache.
-  # PR #1306 measured 112m52s compiling/linking before ~29m of tests, in
-  # addition to setup/lint. A second run exhausted the 150m job budget.
-  # Keep the entire suite, give it headroom, and expose build/run timings
-  # separately. Serialize test compilation so large workspace binaries do
-  # not compete for this runner's memory; packaging remains parallel.
   linux-validate:
+    if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' }}
     runs-on: ubuntu-22.04
     timeout-minutes: 210
     env:
@@ -144,6 +136,7 @@ jobs:
         run: cargo test --locked --lib portable::identifier_scoped_state_tests rclone_import::tests::the_readme_and_the_cli_guide_quote_the_code_count
 
   build-and-release:
+    if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' }}
     # Required for creating releases and Sigstore keyless signing via GitHub OIDC.
     permissions:
       contents: write

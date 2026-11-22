@@ -1,22 +1,20 @@
 name: CLI Smoke Test
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
-# A new SHA on a PR supersedes the previous one: cancel the smoke matrix that
-# was still building for it. On main and on tags nothing is cancelled, as in
-# build.yml: a cancelled main run checks nothing and saves no cache, and the
-# macOS smoke cache is saved only from a finished main run (tracker
-# Requested 76).
 concurrency:
   group: cli-smoke-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   smoke:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
