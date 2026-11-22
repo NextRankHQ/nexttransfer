@@ -1167,7 +1167,7 @@
             "disableUpdateChecks": "Nepārbaudīt atjauninājumus",
             "disableUpdateChecksDesc": "Izlaist automātisko palaišanas un ikdienas atjauninājumu pārbaudi. Noderīgi, ja pārvaldāt NextTransfer, izmantojot WinGet, AUR vai citu ārējo pakotņu pārvaldnieku. Manuālās pārbaudes augstāk joprojām darbojas.",
             "closeToTray": "Aizvērt uz teknes, nevis iziet",
-            "closeToTrayDesc": "Nospiežot loga aizvēršanas pogu, NextTransfer tiek paslēpts sistēmas teknē, nevis aizvērts. Fona uzdevumi, piemēram, AeroCloud sinhronizācija, turpina darboties. Lai izietu, izmantojiet teknes izvēlni.",
+            "closeToTrayDesc": "Nospiežot loga aizvēršanas pogu, NextTransfer tiek paslēpts sistēmas teknē, nevis aizvērts. Lai izietu, izmantojiet teknes izvēlni.",
             "detailedCards": "Detalizētas servera kartes",
             "detailedCardsDesc": "Rādīt kešatmiņā saglabātās krātuves lietojuma joslu kartēs Mani serveri.",
             "favoriteHeart": "Sirsniņa izlasei",

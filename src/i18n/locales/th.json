@@ -971,7 +971,7 @@
             "showFileExtensionsDesc": "แสดงนามสกุลไฟล์ (.txt, .jpg ฯลฯ)",
             "startupOptions": "การเริ่มต้น",
             "launchOnStartup": "เปิดเมื่อเริ่มระบบ",
-            "launchOnStartupDesc": "เปิด NextTransfer โดยอัตโนมัติเมื่อคอมพิวเตอร์ของคุณบูต แนะนำหากคุณใช้ AeroCloud Sync",
+            "launchOnStartupDesc": "",
             "showHiddenFiles": "แสดงไฟล์ที่ซ่อน (dotfiles)",
             "rememberLastFolder": "จำโฟลเดอร์ล่าสุด",
             "rememberLastFolderDesc": "เปิดโฟลเดอร์ท้องถิ่นที่เข้าชมครั้งสุดท้ายเมื่อเริ่มต้น",

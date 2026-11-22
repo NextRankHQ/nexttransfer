@@ -3079,7 +3079,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                         </div>
                                     </div>
 
-                                    {/* AeroVault Overlay Timeout */}
+                                    {/* AeroVault Overlay Timeout (hidden in simple edition) */}
+                                    {false && (
                                     <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
                                         <div className="bg-gray-50 dark:bg-gray-700/50 px-4 py-2 border-b border-gray-200 dark:border-gray-700">
                                             <h4 className="font-medium flex items-center gap-2 text-sm">
@@ -3111,6 +3112,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                             </div>
                                         </div>
                                     </div>
+                                    )}
 
                                     {/* Security Info */}
                                     <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">

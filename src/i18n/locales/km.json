@@ -971,7 +971,7 @@
             "showFileExtensionsDesc": "បង្ហាញ .txt, .jpg ជាដើម នៅចុងបញ្ចប់នៃឈ្មោះឯកសារ",
             "startupOptions": "ការចាប់ផ្តើម",
             "launchOnStartup": "ដំណើរការនៅពេលចាប់ផ្តើម",
-            "launchOnStartupDesc": "បើក NextTransfer ដោយស្វ័យប្រវត្តិនៅពេលកុំព្យូទ័ររបស់អ្នកចាប់ផ្តើម។ បានណែនាំ ប្រសិនបើអ្នកប្រើ AeroCloud Sync។",
+            "launchOnStartupDesc": "",
             "showHiddenFiles": "បង្ហាញឯកសារលាក់ (dotfiles)",
             "rememberLastFolder": "ចងចាំថតចុងក្រោយ",
             "rememberLastFolderDesc": "បើកថតមូលដ្ឋានដែលបានចូលមើលចុងក្រោយនៅពេលចាប់ផ្តើម",
