@@ -957,7 +957,7 @@ fn installed_webview_data_dir() -> Option<PathBuf> {
 
 /// The file the log target writes in [`log_dir`]. tauri-plugin-log names it
 /// after `productName` in `tauri.conf.json`, which a test pins to this name.
-pub const APP_LOG_FILE: &str = "AeroFTP.log";
+pub const APP_LOG_FILE: &str = "NextTransfer.log";
 
 /// The folder the file log target writes to.
 ///
@@ -1570,7 +1570,7 @@ mod tests {
         assert_eq!(log_dir(), Some(logs.clone()));
 
         std::fs::create_dir_all(&logs).unwrap();
-        let file = logs.join("AeroFTP.log");
+        let file = logs.join(APP_LOG_FILE);
         std::fs::write(
             &file,
             "first line\nportable log probe for user@example.com\n",
