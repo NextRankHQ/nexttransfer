@@ -966,7 +966,6 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
         },
         { id: 'ui', label: t('settings.appearance'), icon: <Palette size={16} /> },
         { id: 'security', label: t('settings.security'), icon: <Lock size={16} /> },
-        { id: 'backup', label: t('settings.backup'), icon: <Key size={16} /> },
         { id: 'privacy', label: t('settings.privacy'), icon: <Shield size={16} /> },
     ];
 
@@ -1599,10 +1598,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                         />
                                     </div>
 
-                                    {/* Deliverable G #3: in-app File associations (compact, OS-backed) */}
+                                    {/* Deliverable G #3: in-app File associations (hidden in simple edition) */}
+                                    {false && (
                                     <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
                                         <FileAssociationsPanel compact />
                                     </div>
+                                    )}
                                 </div>
                             )}
 
@@ -1699,7 +1700,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                             </select>
                                         </div>
 
-                                        {nativeRsyncCompiled && (
+                                        {false && nativeRsyncCompiled && (
                                             <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
                                                 <h4 className="font-medium">{t('settings.nativeRsync.title')}</h4>
                                                 <p className="text-sm text-gray-500 mt-1">{t('settings.nativeRsync.description')}</p>
@@ -1757,11 +1758,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                         )}
                                     </div>
 
-                                    {/* The resume store is capped, and forgetting a destination is
-                                        the documented escape from that cap. It reached only the CLI
-                                        until now, so a GUI user could watch the cap drop their
-                                        oldest resumable transfer with nothing to clear instead. */}
-                                    <CheckpointEndpoints />
+                                    {false && <CheckpointEndpoints />}
                                 </div>
                             )}
 
@@ -2588,7 +2585,9 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                                 }
                                             />
 
-                                            <GuiPresentationSettings value={normalizeGuiPresentation(settings.guiPresentation)} onChange={value => updateSetting('guiPresentation', value)} />
+                                            {false && (
+                                                <GuiPresentationSettings value={normalizeGuiPresentation(settings.guiPresentation)} onChange={value => updateSetting('guiPresentation', value)} />
+                                            )}
 
                                             {/* Visible Columns */}
                                             <div className="border-t border-gray-200 dark:border-gray-700 my-4" />
@@ -3158,7 +3157,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                         </div>
                                     </div>
 
-                                    {/* Two-Factor Authentication (2FA) */}
+                                    {/* Two-Factor Authentication (2FA) - hidden in simple edition */}
+                                    {false && (
                                     <div className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg space-y-4">
                                         <div className="flex items-start gap-3">
                                             <div className="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
@@ -3252,10 +3252,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                             </div>
                                         )}
                                     </div>
+                                    )}
                                 </div>
                             )}
 
                             {/* TOTP Setup Modal */}
+                            {false && (
                             <TotpSetup
                                 isOpen={showTotpSetup}
                                 onClose={() => setShowTotpSetup(false)}
@@ -3271,6 +3273,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, o
                                     });
                                 }}
                             />
+                            )}
 
                             {activeTab === 'backup' && (
                                 <div className="space-y-6">
