@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2026-11-22
+
+### NextTransfer 1.0.0 — Initial Simple Edition Release
+
+NextTransfer 1.0.0 is the initial release of NextRankHQ's streamlined desktop file-transfer client for Windows 11, macOS, and Linux, focused on standard file-transfer protocols (**FTP**, **FTPS**, **SFTP**, **SCP**) and **S3-compatible Object Storage**.
+
+- **Focused Protocol & S3 Support**: Dedicated support for FTP, FTPS, SFTP, SCP, Amazon S3, Cloudflare R2, Backblaze B2, Wasabi, DigitalOcean Spaces, MinIO, Storj, IDrive e2, Alibaba Cloud OSS, Tencent COS, Oracle Object Storage, and custom S3 endpoints.
+- **Streamlined Interface**: Clean dual-pane file manager, transfer queue, and simplified settings without legacy cloud sync, AI agent, or container encryption clutter.
+- **Sigstore Verified Releases**: Automatic update verification backed by Sigstore keyless signing from `NextRankHQ/nexttransfer`.
+
 ## [4.2.7] - 2026-11-08
 
 ### Network Trust, Storage Presets and Object Integrity
