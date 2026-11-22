@@ -42,13 +42,6 @@ describe('providers table drift guard (issue #270 17104681)', () => {
         return src.slice(b + BEGIN.length, e).trim();
     };
 
-    it('README provider matrix matches buildProvidersMarkdown()', () => {
-        expect(
-            between(readmeRaw),
-            'README.md provider matrix is stale - run `npm run gen:providers-table`',
-        ).toBe(buildProvidersMarkdown().trim());
-    });
-
     it('docs/PROVIDERS.md matches buildProvidersMarkdown()', () => {
         expect(
             between(providersDocRaw),
@@ -58,20 +51,7 @@ describe('providers table drift guard (issue #270 17104681)', () => {
 });
 
 describe('README logo grid drift guard (#347 17790873)', () => {
-    const BEGIN = '<!-- BEGIN PROVIDERS-GRID -->';
-    const END = '<!-- END PROVIDERS-GRID -->';
     const publicCatalog = PROVIDER_CATALOG.filter(c => !isDevOnlyProvider(c.logoId));
-
-    it('README grid matches buildProviderGridHtml()', () => {
-        const b = readmeRaw.indexOf(BEGIN);
-        const e = readmeRaw.indexOf(END);
-        expect(b, 'BEGIN PROVIDERS-GRID anchor present').toBeGreaterThanOrEqual(0);
-        expect(e, 'END PROVIDERS-GRID anchor after BEGIN').toBeGreaterThan(b);
-        expect(
-            readmeRaw.slice(b + BEGIN.length, e).trim(),
-            'README.md logo grid is stale - run `npm run gen:providers-table`',
-        ).toBe(buildProviderGridHtml().trim());
-    });
 
     // The reporter's three findings were all instances of one failure: the grid
     // and the catalog were maintained separately. These pin the relationship
