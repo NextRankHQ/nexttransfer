@@ -307,8 +307,8 @@ export const CustomTitlebar: React.FC<TitlebarProps> = (props) => {
     const helpMenu: MenuEntry[] = [
         { label: t('menu.shortcuts'), shortcut: 'F1', onClick: onShowShortcuts },
         { separator: true },
-        { label: t('menu.website'), onClick: () => openUrl('https://nextrankhq.com') },
-        { label: t('menu.documentation'), onClick: () => openUrl('https://github.com/NextRankHQ/nexttransfer#readme') },
+        { label: t('menu.website'), onClick: () => openUrl('https://nextrankhq.com/next-transfer') },
+        { label: t('menu.documentation'), onClick: () => openUrl('https://nextrankhq.com/next-transfer') },
         { separator: true },
         { label: t('menu.checkForUpdates'), onClick: onCheckForUpdates },
         { separator: true },

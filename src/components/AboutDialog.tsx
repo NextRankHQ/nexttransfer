@@ -450,7 +450,7 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                                     SourceForge
                                 </button>
                                 <button
-                                    onClick={() => openUrl('https://nextrankhq.com')}
+                                    onClick={() => openUrl('https://nextrankhq.com/next-transfer')}
                                     className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg transition-colors text-sm text-gray-600 dark:text-gray-300"
                                 >
                                     <Mail size={16} />
@@ -461,11 +461,11 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                             {/* Website & Docs */}
                             <div className="flex justify-center gap-4">
                                 <button
-                                    onClick={() => openUrl('https://nextrankhq.com')}
+                                    onClick={() => openUrl('https://nextrankhq.com/next-transfer')}
                                     className="inline-flex items-center gap-1.5 text-xs text-blue-500 dark:text-cyan-500 hover:text-blue-400 dark:hover:text-cyan-400 transition-colors font-mono"
                                 >
                                     <ExternalLink size={12} />
-                                    nextrankhq.com
+                                    nextrankhq.com/next-transfer
                                 </button>
                                 <button
                                     onClick={() => openUrl('https://github.com/NextRankHQ/nexttransfer')}
@@ -490,7 +490,7 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                                         {t('about.reportIssue')}
                                     </button>
                                     <button
-                                        onClick={() => openUrl('https://github.com/NextRankHQ/nexttransfer#readme')}
+                                        onClick={() => openUrl('https://nextrankhq.com/next-transfer')}
                                         className="flex items-center gap-1.5 px-3 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg transition-colors text-xs text-gray-600 dark:text-gray-300"
                                     >
                                         <ExternalLink size={12} />
