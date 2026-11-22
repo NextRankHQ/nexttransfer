@@ -229,7 +229,7 @@ jobs:
     # build of the CLI per PR (about 25 minutes) and cannot change with the
     # PR's diff in a way the smoke matrix above does not already exercise.
     # Runs on main and on demand.
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
@@ -284,7 +284,7 @@ jobs:
     # every PR. Coverage is a report, not a gate (the floor below is far under
     # the baseline), so it runs on main and on demand, and no longer waits
     # for the smoke binaries it never used.
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
