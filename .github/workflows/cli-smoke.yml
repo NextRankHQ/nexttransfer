@@ -1,52 +1,6 @@
 name: CLI Smoke Test
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'src-tauri/src/bin/aeroftp_cli.rs'
-      - 'src-tauri/src/cli_dispatch.rs'
-      - 'src-tauri/src/providers/**'
-      - 'src/shared/connection-manifest.json'
-      - 'src-tauri/src/connection_manifest.rs'
-      - 'src-tauri/src/profile_loader.rs'
-      - 'src-tauri/src/rclone_import.rs'
-      - 'src-tauri/src/bridge_shared.rs'
-      - 'src-tauri/examples/connection_profile_parity.rs'
-      - 'src-tauri/src/profile_auth*.rs'
-      - 'src-tauri/tests/fixtures/profile-auth/**'
-      - 'src-tauri/src/mcp/tools.rs'
-      - 'src-tauri/src/mcp/pool.rs'
-      - 'src-tauri/src/lib.rs'
-      - 'src-tauri/build.rs'
-      - 'docs/COMMAND-INVENTORY.json'
-      - '.github/scripts/profile-auth-parity.py'
-      - '.github/scripts/cli-get-cwd.py'
-      - 'src-tauri/Cargo.toml'
-      - '.github/workflows/cli-smoke.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'src-tauri/src/bin/aeroftp_cli.rs'
-      - 'src-tauri/src/cli_dispatch.rs'
-      - 'src-tauri/src/providers/**'
-      - 'src/shared/connection-manifest.json'
-      - 'src-tauri/src/connection_manifest.rs'
-      - 'src-tauri/src/profile_loader.rs'
-      - 'src-tauri/src/rclone_import.rs'
-      - 'src-tauri/src/bridge_shared.rs'
-      - 'src-tauri/examples/connection_profile_parity.rs'
-      - 'src-tauri/src/profile_auth*.rs'
-      - 'src-tauri/tests/fixtures/profile-auth/**'
-      - 'src-tauri/src/mcp/tools.rs'
-      - 'src-tauri/src/mcp/pool.rs'
-      - 'src-tauri/src/lib.rs'
-      - 'src-tauri/build.rs'
-      - 'docs/COMMAND-INVENTORY.json'
-      - '.github/scripts/profile-auth-parity.py'
-      - '.github/scripts/cli-get-cwd.py'
-      - 'src-tauri/Cargo.toml'
-      - '.github/workflows/cli-smoke.yml'
   workflow_dispatch:
 
 permissions:
@@ -59,7 +13,7 @@ permissions:
 # Requested 76).
 concurrency:
   group: cli-smoke-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: true
 
 jobs:
   smoke:

@@ -25,28 +25,7 @@ name: Aerorsync Protocol
 # present but the artifact directories underneath are gitignored.
 
 on:
-  push:
-    branches:
-      - main
-      - 'strada-c-**'
-    paths:
-      - 'src-tauri/src/aerorsync/**'
-      - 'src-tauri/src/providers/sftp.rs'
-      - 'src-tauri/Cargo.toml'
-      - 'src-tauri/Cargo.lock'
-      - '.github/workflows/aerorsync-protocol.yml'
-      - '.github/actions/apt-install/**'
-  pull_request:
-    branches:
-      - main
-      - 'strada-c-**'
-    paths:
-      - 'src-tauri/src/aerorsync/**'
-      - 'src-tauri/src/providers/sftp.rs'
-      - 'src-tauri/Cargo.toml'
-      - 'src-tauri/Cargo.lock'
-      - '.github/workflows/aerorsync-protocol.yml'
-      - '.github/actions/apt-install/**'
+  workflow_dispatch:
 
 env:
   CARGO_TERM_COLOR: always

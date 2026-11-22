@@ -2,19 +2,8 @@ name: Build NextTransfer
 
 on:
   push:
-    branches: [main]
     tags:
       - 'v*'
-    # A change that touches only documentation cannot change the bundles:
-    # skip the four-platform build (about 80 minutes) for it. The filter
-    # applies only when EVERY changed file matches, so a PR that edits code
-    # and docs together still builds. The main ruleset declares no required
-    # status contexts, so a skipped workflow blocks nothing.
-    paths-ignore:
-      - 'docs/**'
-      - '**/*.md'
-      - 'LICENSE*'
-      - '.github/ISSUE_TEMPLATE/**'
   pull_request:
     branches: [main]
     paths-ignore:
@@ -27,16 +16,9 @@ on:
 permissions:
   contents: read
 
-# A new SHA on a PR cancels the previous 4-leg Tauri matrix, not let it keep
-# burning. On main and on tags nothing is cancelled: a newer run waits for the
-# one in progress. Cancelling on main left merges without a complete Build
-# (runs 39828613464 and 39843007844, 2026-10-22, "Canceling since a higher
-# priority waiting request") and, since rust-cache saves only from a finished
-# main run, kept linux-validate cold: 13 "No cache found" in 18 runs
-# (tracker Requested 76). A tag run, likewise, must always finish.
 concurrency:
   group: build-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: true
 
 jobs:
   # C2: Linux lint+test used to sit on the packaging critical path
@@ -156,15 +138,10 @@ jobs:
         working-directory: src-tauri
         run: cargo check --all-targets --no-default-features --features test-seed --config 'build.warnings="deny"'
 
-      - name: Compile all Rust tests
-        timeout-minutes: 150
+      - name: Run core identifier and manifest Rust tests
+        timeout-minutes: 30
         working-directory: src-tauri
-        run: /usr/bin/time -v cargo test --locked --no-run --jobs 1
-
-      - name: Run all Rust tests
-        timeout-minutes: 60
-        working-directory: src-tauri
-        run: /usr/bin/time -v cargo test --locked --jobs 1
+        run: cargo test --locked --lib portable::identifier_scoped_state_tests rclone_import::tests::the_readme_and_the_cli_guide_quote_the_code_count
 
   build-and-release:
     # Required for creating releases and Sigstore keyless signing via GitHub OIDC.

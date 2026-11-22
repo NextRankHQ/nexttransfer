@@ -16,11 +16,6 @@ name: Aerorsync Windows Check
 
 on:
   workflow_dispatch:
-    inputs:
-      ref:
-        description: "Branch / tag / SHA to check (default: current ref)"
-        required: false
-        default: ""
 
 env:
   CARGO_TERM_COLOR: always

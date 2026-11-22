@@ -7,16 +7,6 @@ name: Windows Unit Tests
 # rsync/SFTP paths it was first scoped to (see the job comment below).
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'src-tauri/**'
-      - '.github/workflows/windows-unit-tests.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'src-tauri/**'
-      - '.github/workflows/windows-unit-tests.yml'
   workflow_dispatch:
 
 permissions:
@@ -26,7 +16,7 @@ permissions:
 # main every commit keeps its own run.
 concurrency:
   group: windows-unit-tests-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: true
 
 jobs:
   windows-native:

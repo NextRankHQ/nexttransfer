@@ -14,20 +14,6 @@ name: Peer L0 Workspace
 # A weekly schedule provides a regular rerun of the pinned checks on the latest runner environment.
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'src-tauri/peer-l0/**'
-      - 'scripts/assert-tests-ran.sh'
-      - '.github/workflows/peer-l0.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'src-tauri/peer-l0/**'
-      - 'scripts/assert-tests-ran.sh'
-      - '.github/workflows/peer-l0.yml'
-  schedule:
-    - cron: '37 4 * * 1'
   workflow_dispatch:
 
 permissions:

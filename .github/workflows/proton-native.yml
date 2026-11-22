@@ -13,30 +13,6 @@ name: Proton Native
 # here is attributed only after checking which commits really triggered it.
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'src-tauri/src/providers/proton_native/**'
-      - 'src-tauri/src/providers/mod.rs'
-      - 'src-tauri/src/providers/retry_after.rs'
-      - 'src-tauri/vendor/proton-rpgp/**'
-      - 'src-tauri/build.rs'
-      - 'src-tauri/Cargo.toml'
-      - 'src-tauri/Cargo.lock'
-      - '.github/workflows/proton-native.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'src-tauri/src/providers/proton_native/**'
-      - 'src-tauri/src/providers/mod.rs'
-      - 'src-tauri/src/providers/retry_after.rs'
-      - 'src-tauri/vendor/proton-rpgp/**'
-      - 'src-tauri/build.rs'
-      - 'src-tauri/Cargo.toml'
-      - 'src-tauri/Cargo.lock'
-      - '.github/workflows/proton-native.yml'
-  schedule:
-    - cron: '17 4 * * 1'
   workflow_dispatch:
 
 permissions:

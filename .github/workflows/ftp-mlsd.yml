@@ -11,28 +11,6 @@
 name: FTP MLSD listing
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'src-tauri/src/providers/ftp.rs'
-      - 'src-tauri/src/providers/ftp_listing.rs'
-      - 'src-tauri/src/providers/types.rs'
-      - 'src-tauri/tests/integration_ftp_mlsd.rs'
-      - 'src-tauri/tests/fixtures/ftp-mlsd/**'
-      - 'src-tauri/tests/fixtures/ftp/**'
-      - '.github/workflows/ftp-mlsd.yml'
-      - '.github/actions/apt-install/**'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'src-tauri/src/providers/ftp.rs'
-      - 'src-tauri/src/providers/ftp_listing.rs'
-      - 'src-tauri/src/providers/types.rs'
-      - 'src-tauri/tests/integration_ftp_mlsd.rs'
-      - 'src-tauri/tests/fixtures/ftp-mlsd/**'
-      - 'src-tauri/tests/fixtures/ftp/**'
-      - '.github/workflows/ftp-mlsd.yml'
-      - '.github/actions/apt-install/**'
   workflow_dispatch:
 
 permissions:

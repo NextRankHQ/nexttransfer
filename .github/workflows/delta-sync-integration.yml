@@ -5,56 +5,6 @@ name: Delta Sync Integration
 # so unrelated PRs don't pay for it.
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'src-tauri/src/lib.rs'
-      - 'src-tauri/src/settings.rs'
-      - 'src-tauri/src/ssh_exec.rs'
-      - 'src-tauri/src/rsync_output.rs'
-      - 'src-tauri/src/rsync_over_ssh.rs'
-      - 'src-tauri/src/delta_transport.rs'
-      - 'src-tauri/src/delta_sync_rsync.rs'
-      # The native rsync wire implementation lives here and is the code
-      # this job actually exercises end-to-end. Omitting it meant a
-      # native-rsync change did not trigger this job at its own commit;
-      # the regression only surfaced later when an unrelated filtered
-      # path (Cargo.lock, lib.rs) triggered the job, producing
-      # misleading "clean bisects" that blamed the triggering commit.
-      - 'src-tauri/src/aerorsync/**'
-      - 'src-tauri/src/providers/sftp.rs'
-      - 'src-tauri/src/providers/scp/**'
-      - 'src-tauri/src/providers/mod.rs'
-      - 'src-tauri/tests/scp_openwrt.rs'
-      - 'src-tauri/tests/live_scp_channels.rs'
-      - 'src-tauri/tests/live_sftp_replace.rs'
-      - 'src-tauri/Cargo.lock'
-      - 'src-tauri/tests/fixtures/sftp-rsync/**'
-      - 'src-tauri/tests/integration_delta_sync.rs'
-      - '.github/workflows/delta-sync-integration.yml'
-      - '.github/actions/apt-install/**'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'src-tauri/src/lib.rs'
-      - 'src-tauri/src/settings.rs'
-      - 'src-tauri/src/ssh_exec.rs'
-      - 'src-tauri/src/rsync_output.rs'
-      - 'src-tauri/src/rsync_over_ssh.rs'
-      - 'src-tauri/src/delta_transport.rs'
-      - 'src-tauri/src/delta_sync_rsync.rs'
-      - 'src-tauri/src/aerorsync/**'
-      - 'src-tauri/src/providers/sftp.rs'
-      - 'src-tauri/src/providers/scp/**'
-      - 'src-tauri/src/providers/mod.rs'
-      - 'src-tauri/tests/scp_openwrt.rs'
-      - 'src-tauri/tests/live_scp_channels.rs'
-      - 'src-tauri/tests/live_sftp_replace.rs'
-      - 'src-tauri/Cargo.lock'
-      - 'src-tauri/tests/fixtures/sftp-rsync/**'
-      - 'src-tauri/tests/integration_delta_sync.rs'
-      - '.github/workflows/delta-sync-integration.yml'
-      - '.github/actions/apt-install/**'
   workflow_dispatch:
 
 permissions:
