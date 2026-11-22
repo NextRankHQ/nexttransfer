@@ -61,11 +61,7 @@ export const ShortcutsDialog: React.FC<ShortcutsDialogProps> = ({ isOpen, onClos
         },
         {
             category: t('shortcuts.view'), items: [
-                { keys: ['Ctrl', '1'], action: t('shortcuts.toggleEditor') },
-                { keys: ['Ctrl', '2'], action: t('shortcuts.toggleTerminal') },
-                { keys: ['Ctrl', '3'], action: t('shortcuts.toggleAgent') },
                 { keys: ['Ctrl', 'Shift', 'L'], action: t('shortcuts.activityLog') },
-                { keys: ['Ctrl', 'Shift', 'M'], action: t('shortcuts.debugPanel') },
                 { keys: ['Ctrl', 'Shift', 'V'], action: t('shortcuts.detailedCards') },
                 { keys: ['Ctrl', 'T'], action: t('shortcuts.toggleTheme') },
             ]

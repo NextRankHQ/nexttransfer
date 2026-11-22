@@ -3134,7 +3134,7 @@ export const ConnectionScreen: React.FC<ConnectionScreenProps> = ({
                     decrypted (Filen/MEGA-style). Remote/local scope come from the
                     paths above. Offered on every provider-API backend. */}
                 {overlayEligible && (
-                    <div className="rounded-lg border border-gray-300 dark:border-gray-600 overflow-hidden">
+                    <div className="hidden rounded-lg border border-gray-300 dark:border-gray-600 overflow-hidden">
                         {/* Ehud #276 (17324431): collapsible "Wrappers / Overlays" parent so
                             the Quick Connect page stays uncluttered. Crypt is the first
                             sub-section; future overlays slot in alongside it. */}

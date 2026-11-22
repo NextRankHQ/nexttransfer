@@ -764,15 +764,6 @@ export const ActivityLogPanel: React.FC<ActivityLogPanelProps> = ({
 
                 {/* Actions */}
                 <div className="flex items-center gap-2">
-                    {/* AeroCloud sync filter toggle */}
-                    <button
-                        onClick={() => setShowCloudSync(!showCloudSync)}
-                        className={`p-1.5 rounded transition-all ${showCloudSync ? themeConfig.button : 'opacity-40 ' + themeConfig.button}`}
-                        title={showCloudSync ? t('activityPanel.hideCloudSync') : t('activityPanel.showCloudSync')}
-                    >
-                        <Cloud size={12} className={showCloudSync ? 'text-[#7dcfff]' : ''} />
-                    </button>
-
                     {/* Multi-select filter dropdown: Q8 from #133.
                         Replaces the old single-pick <select> so users can
                         combine "Errors + Uploads" without losing one when

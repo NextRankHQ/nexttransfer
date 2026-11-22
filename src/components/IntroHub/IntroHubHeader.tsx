@@ -226,17 +226,6 @@ export function IntroHubHeader({
                     </button>
                 )}
 
-                {/* AeroFile */}
-                {onAeroFile && (
-                    <button
-                        onClick={onAeroFile}
-                        className="flex items-center p-1.5 bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-800/40 text-blue-600 dark:text-blue-400 rounded-lg transition-colors"
-                        title="AeroFile"
-                    >
-                        <FolderOpen size={16} />
-                    </button>
-                )}
-
                 {/* Cross-Profile Transfer entry point lives in the My Servers
                     toolbar next to the selection ring/badge, where it pairs
                     with the per-card selection flow. The header duplicate was

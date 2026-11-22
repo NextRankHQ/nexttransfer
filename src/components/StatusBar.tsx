@@ -450,21 +450,6 @@ export const StatusBar: React.FC<StatusBarProps> = ({
                     </button>
                 )}
 
-                {/* AeroFile Button */}
-                {onToggleAeroFile && (
-                    <button
-                        onClick={onToggleAeroFile}
-                        className={`flex items-center gap-1.5 px-2 py-0.5 rounded transition-colors ${aeroFileActive
-                            ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400'
-                            : 'hover:bg-gray-200 dark:hover:bg-gray-700'
-                            }`}
-                        title={t('statusBar.aerofileTitle')}
-                    >
-                        <FolderOpen size={12} />
-                        <span>{t('statusBar.aerofile')}</span>
-                    </button>
-                )}
-
                 {/* AeroShare receiver indicator + toggle (self-contained; renders
                     only once AeroShare is activated). Sits next to AeroCloud. */}
                 <AeroShareStatusButton />

@@ -286,14 +286,9 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                             </div>
 
                             {/* Features list */}
-                            <div className="grid grid-cols-3 gap-x-2 gap-y-1.5 text-xs text-gray-500 dark:text-gray-400 py-2">
+                            <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 text-xs text-gray-500 dark:text-gray-400 py-2">
                                 <div className="font-mono">{t('about.features.rustEngine')}</div>
-                                <div className="font-mono">{t('about.features.monacoEditor')}</div>
-                                <div className="font-mono">{t('about.features.ptyTerminal')}</div>
-                                <div className="font-mono">{t('about.features.aiAgent')}</div>
                                 <div className="font-mono">{t('about.features.ftpsSecure')}</div>
-                                <div className="font-mono">{t('about.features.fileSync')}</div>
-                                <div className="font-mono">{t('about.features.aeroCloud')}</div>
                                 <div className="font-mono">{t('about.features.mediaPlayer')}</div>
                                 <div className="font-mono">{t('about.features.imagePreview')}</div>
                             </div>
@@ -301,13 +296,7 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                             {/* Protocols & Providers */}
                             <div className="text-center py-2 border-t border-gray-200 dark:border-gray-800">
                                 <p className="text-[11px] text-gray-500 font-mono">
-                                    FTP / FTPS / SFTP / WebDAV / S3 / GitHub
-                                </p>
-                                <p className="text-[11px] text-gray-500 font-mono">
-                                    Google Drive / Dropbox / OneDrive / MEGA / Box / Filen
-                                </p>
-                                <p className="text-[10px] text-gray-400 dark:text-gray-600 font-mono mt-1">
-                                    {t('about.statsLine', { protocols: 25, languages: 47 })}
+                                    FTP / FTPS / SFTP / SCP / S3
                                 </p>
                             </div>
 
@@ -319,26 +308,6 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                                     className="text-[11px] text-blue-500 dark:text-cyan-500 hover:text-blue-400 dark:hover:text-cyan-400 transition-colors font-mono mt-0.5 inline-block"
                                 >
                                     GNU General Public License v3.0
-                                </button>
-                            </div>
-
-                            {/* Team: the people in TEAM.md, with the same roles. Initials
-                                because TEAM.md uses them; the link opens the full page. */}
-                            <div className="text-center py-2 border-t border-gray-200 dark:border-gray-800 space-y-1">
-                                <p className="text-xs font-semibold text-gray-600 dark:text-gray-300 font-mono">
-                                    {t('about.team.title')}
-                                </p>
-                                <p className="text-[11px] text-gray-500 font-mono">
-                                    <span className="text-gray-700 dark:text-gray-300">A.P.</span> &middot; {t('about.team.apRole')}
-                                </p>
-                                <p className="text-[11px] text-gray-500 font-mono">
-                                    <span className="text-gray-700 dark:text-gray-300">E.K., PhD</span> &middot; {t('about.team.ekRole')}
-                                </p>
-                                <button
-                                    onClick={() => openUrl('https://github.com/axpdev-lab/aeroftp/blob/main/TEAM.md')}
-                                    className="text-[11px] text-blue-500 dark:text-cyan-500 hover:text-blue-400 dark:hover:text-cyan-400 transition-colors font-mono inline-block"
-                                >
-                                    TEAM.md
                                 </button>
                             </div>
 
@@ -441,13 +410,6 @@ export const AboutDialog: React.FC<AboutDialogProps> = ({ isOpen, onClose }) => 
                                 >
                                     <Github size={16} />
                                     {t('about.github')}
-                                </button>
-                                <button
-                                    onClick={() => openUrl('https://sourceforge.net/projects/aeroftp/?pk_campaign=badge&pk_source=vendor')}
-                                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg transition-colors text-sm text-gray-600 dark:text-gray-300"
-                                >
-                                    <SourceForge size={16} />
-                                    SourceForge
                                 </button>
                                 <button
                                     onClick={() => openUrl('https://nextrankhq.com/next-transfer')}
